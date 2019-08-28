@@ -1,0 +1,84 @@
+<section class="bg-gradient">
+  <h2 class="page-subtitle">Vehicle Information</h2>
+</section>
+<div class="center question">
+  Let's add this vehicle
+  <br>
+  <br>
+  <form>
+    <mat-vertical-stepper>
+      <mat-step label="What's the year, make and model?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Year"
+            [(ngModel)]="vehicle.year" name="year" #year="ngModel">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Make"
+            [(ngModel)]="vehicle.make" name="make" #make="ngModel">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Model"
+            [(ngModel)]="vehicle.model" name="model" #model="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious (click)="navigate('home')">Back</button>
+          <button mat-button matStepperNext
+          [disabled]="year.value == '' || make.value == '' || model.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Is this ### ### ### owned, financed, or leased?">
+        <div>
+          <mat-radio-group [(ngModel)]="vehicle.vehicleOwned" name="vehicleOwned" #vehicleOwned="ngModel">
+            <mat-radio-button value="Owned">Owned</mat-radio-button>
+            <mat-radio-button value="Financed">Financed</mat-radio-button>
+            <mat-radio-button value="Leased">Leased</mat-radio-button>
+          </mat-radio-group>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext
+          [disabled]="vehicleOwned.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="How is the ### ### ### primarily used?">
+        <div>
+          <mat-radio-group [(ngModel)]="vehicle.vehicleUsage" name="vehicleUsage" #vehicleUsage="ngModel">
+            <mat-radio-button value="Commute">Commute ( to work or school )</mat-radio-button>
+            <mat-radio-button value="Pleasure">Pleasure</mat-radio-button>
+            <mat-radio-button value="Business">Business</mat-radio-button>
+          </mat-radio-group>
+          <br>
+          <mat-form-field *ngIf="vehicleUsage.value == 'Commute'">
+            <input matInput placeholder="Days Driven to work and/or school"
+            [(ngModel)]="vehicle.daysDriven" name="daysDriven">
+          </mat-form-field>
+          <mat-form-field *ngIf="vehicleUsage.value == 'Commute'">
+            <input matInput placeholder="Miles Driven to work/school ( one way )"
+            [(ngModel)]="vehicle.milesDriven" name="milesDriven">
+          </mat-form-field>
+          <mat-form-field *ngIf="vehicleUsage.value == 'Business'">
+            <input matInput placeholder="How is this vehicle used in business?"
+            [(ngModel)]="vehicle.vehiclePrimaryUse" name="vehiclePrimaryUse">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext
+          [disabled]="vehicleUsage.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="What's the annual mileage for this ### ### ###?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Annual Mileage"
+            [(ngModel)]="vehicle.annualMileage" name="annualMileage" #annualMileage="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="save()"
+          [disabled]="annualMileage.value == ''">Next</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+  <app-vehicle-details></app-vehicle-details>
+</div>

@@ -1,0 +1,60 @@
+<section class="bg-gradient">
+  <h2 class="page-subtitle">Customer Information</h2>
+</section>
+<div class="center question">
+  First things first.
+  <br>
+  <br>
+  <form>
+    <mat-vertical-stepper>
+      <mat-step label="What's your name?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="First name" #fname="ngModel"
+            [(ngModel)]="customer.firstName" name="firstName">
+          </mat-form-field>
+          <span>&emsp;</span>
+          <mat-form-field>
+            <input matInput placeholder="Last name" #lname="ngModel"
+            [(ngModel)]="customer.lastName" name="lastName">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperNext 
+          [disabled]="fname.value == '' || lname.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="When were you born?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Date of Birth"
+            [(ngModel)]="customer.dob" name="dob" #dob="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext
+          [disabled]="dob.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="What's your address?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Street Address" 
+            [(ngModel)]="customer.stAddr" name="stAddr" #stAddr="ngModel">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Apt #"
+            [(ngModel)]="customer.apt" name="apt" #apt="ngModel">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Zip Code"
+            [(ngModel)]="customer.zipCode" name="zipCode" #zipCode="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="save()"
+          [disabled]="stAddr.value == '' || apt.value == '' || zipCode.value == ''">Next</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+</div>

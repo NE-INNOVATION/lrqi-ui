@@ -1,0 +1,46 @@
+<section class="bg-gradient">
+  <h2 class="page-subtitle">Policy Info</h2>
+</section>
+<div class="center question">
+  Policy Issuance
+  <br>
+  <br>
+  <span *ngIf="policy.policyNumber !== ''">
+    The Auto policy has been issued successfully <br>
+    Policy Number: {{policy.policyNumber}}</span>
+  <form *ngIf="policy.policyNumber === ''">
+    <mat-vertical-stepper>
+      <mat-step label="Contact Info">
+        <mat-form-field>
+          <input matInput placeholder="Email"
+          [(ngModel)]="policy.confirmEmail" name="confirmEmail">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput placeholder="Contact Number"
+          [(ngModel)]="policy.confirmContactNum" name="confirmContactNum">
+        </mat-form-field>
+        <br>
+        <div>
+          <button mat-button matStepperPrevious (click)="navigate('rate')">Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Payment">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Bank Name"
+            [(ngModel)]="policy.bankName" name="bankName">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Account Number"
+            [(ngModel)]="policy.accountNum" name="accountNum">
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="accent" (click)="save()">Issue</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+</div>

@@ -1,0 +1,47 @@
+<section class="bg-gradient">
+  <h2 class="page-subtitle">Incident Information</h2>
+</section>
+<div class="center question">
+  If any driver has had any incident, please add them below.
+  <br>
+  <br>
+  <form>
+    <mat-vertical-stepper>
+      <mat-step label="We need a few details about this incident.">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Incident Type"
+            [(ngModel)]="incident.category" name="type" #name="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Who was driving?"
+            [(ngModel)]="incident.driver" name="driver" #driver="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious (click)="navigate('driver')">Back</button>
+          <button mat-button matStepperNext
+          [disabled]="name.value == '' || driver.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="We need a few details about this incident.">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Were you primarily responsible for the accident?"
+            [(ngModel)]="incident.responsible" name="responsible" #responsible="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="How long ago was this accident? "
+            [(ngModel)]="incident.when" name="when" #when="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="save()"
+          [disabled]="responsible.value == '' || when.value == ''">Next</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+  <app-incident-details></app-incident-details>
+</div>

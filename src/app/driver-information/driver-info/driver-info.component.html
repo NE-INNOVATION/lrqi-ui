@@ -1,0 +1,82 @@
+<section class="bg-gradient">
+  <h2 class="page-subtitle">Driver Information</h2>
+</section>
+<div class="center question">
+  Tell us more about you!
+  <br>
+  <br>
+  <form>
+    <mat-vertical-stepper>
+      <mat-step label="Tell us more about you!">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Name"
+            [(ngModel)]="driver.name" name="name" #name="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Gender"
+            [(ngModel)]="driver.gender" name="gender" #gender="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Marital Status"
+            [(ngModel)]="driver.maritalStatus" name="maritalStatus" #maritalStatus="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Social Security Number"
+            [(ngModel)]="driver.ssn" name="ssn" #ssn="ngModel">
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput placeholder="Employment Status"
+            [(ngModel)]="driver.employmentStatus" name="employmentStatus" #employmentStatus="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious (click)="navigate('vehicle')">Back</button>
+          <button mat-button matStepperNext
+          [disabled]="name.value == '' || gender.value == '' || maritalStatus.value == '' || ssn.value == '' || employmentStatus.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="About your insurance">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Do you currently have auto insurance?"
+            [(ngModel)]="driver.currentIns" name="currentIns" #currentins="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext
+          [disabled]="currentins.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Tell us more about your driving history">
+        <div>
+          <mat-form-field>
+            <input matInput 
+            placeholder="How old were you when you got your driver's license in the U.S. or Canada? " 
+            [(ngModel)]="driver.licensedAge" name="licensedAge" #licensedAge="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext
+          [disabled]="licensedAge.value == ''">Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="What is the highest level of education you have completed?">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="What is the highest level of education you have completed?" 
+            [(ngModel)]="driver.education" name="education" #education="ngModel">
+          </mat-form-field>
+          <br>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="save()"
+          [disabled]="education.value == ''">Next</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+  <app-driver-details></app-driver-details>
+</div>
