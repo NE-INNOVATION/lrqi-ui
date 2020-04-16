@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'vehicle',
-    loadChildren: './vehicle-information/vehicle-information.module#VehicleInformationModule'
+    loadChildren: () => import('./vehicle-information/vehicle-information.module').then(m => m.VehicleInformationModule)
   },
   {
     path: '',
