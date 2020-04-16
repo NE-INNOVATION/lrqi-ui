@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gatewayUrl : 'https://gatewayapi.apps.apbg.apcf.io/api/gateway' //'http://localhost:8080/api/gateway'
+  gatewayUrl : 'http://localhost:8080/api/gateway'
 };
 
 /*
