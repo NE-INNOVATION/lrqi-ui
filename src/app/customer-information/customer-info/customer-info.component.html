@@ -11,12 +11,12 @@
         <div>
           <mat-form-field>
             <input matInput placeholder="First name" #fname="ngModel"
-            [(ngModel)]="customer.firstName" name="firstName">
+            [(ngModel)]="customer.firstName" name="firstName" minlength="3" maxlength="40">
           </mat-form-field>
           <span>&emsp;</span>
           <mat-form-field>
             <input matInput placeholder="Last name" #lname="ngModel"
-            [(ngModel)]="customer.lastName" name="lastName">
+            [(ngModel)]="customer.lastName" name="lastName"  minlength="3" maxlength="40">
           </mat-form-field>
           <br>
           <button mat-button matStepperNext 
@@ -25,10 +25,12 @@
       </mat-step>
       <mat-step label="When were you born?">
         <div>
-          <mat-form-field>
-            <input matInput placeholder="Date of Birth"
-            [(ngModel)]="customer.dob" name="dob" #dob="ngModel">
-          </mat-form-field>
+            <mat-form-field>
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="dp3" #dob="ngModel" [(ngModel)]="customer.dob" name="dob" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+              <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+            </mat-form-field> 
           <br>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext
@@ -39,15 +41,15 @@
         <div>
           <mat-form-field>
             <input matInput placeholder="Street Address" 
-            [(ngModel)]="customer.stAddr" name="stAddr" #stAddr="ngModel">
+            [(ngModel)]="customer.stAddr" name="stAddr" #stAddr="ngModel" minlength="10" pattern="^\d+\s[A-z]+\s[A-z]+">
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Apt #"
-            [(ngModel)]="customer.apt" name="apt" #apt="ngModel">
+            [(ngModel)]="customer.apt" name="apt" #apt="ngModel" minlength="1">
           </mat-form-field>
           <mat-form-field>
             <input matInput placeholder="Zip Code"
-            [(ngModel)]="customer.zipCode" name="zipCode" #zipCode="ngModel">
+            [(ngModel)]="customer.zipCode" name="zipCode" #zipCode="ngModel" pattern="(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)">
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
