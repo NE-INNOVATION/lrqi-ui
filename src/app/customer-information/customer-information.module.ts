@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import {FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatStepperModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   declarations: [
     CustomerInfoComponent
