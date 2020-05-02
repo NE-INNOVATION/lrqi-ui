@@ -11,15 +11,23 @@
         <div>
           <mat-form-field>
             <input matInput placeholder="Year"
-            [(ngModel)]="vehicle.year" name="year" #year="ngModel">
+            [(ngModel)]="vehicle.year" name="year" #year="ngModel" pattern="^[12][0-9]{3}$">
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Make"
-            [(ngModel)]="vehicle.make" name="make" #make="ngModel">
+            <mat-label>Vehicle Make</mat-label>
+            <mat-select [(ngModel)]="vehicle.make" name="make" #make="ngModel" (selectionChange)="loadModels()">
+              <mat-option *ngFor="let make of makes" [value]="make.code">
+                {{make.name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field>
-            <input matInput placeholder="Model"
-            [(ngModel)]="vehicle.model" name="model" #model="ngModel">
+            <mat-label>Vehicle Model</mat-label>
+            <mat-select #model="ngModel" [(ngModel)]="vehicle.model" name="model" #make="ngModel" (selectionChange)="loadModels()">
+              <mat-option *ngFor="let model of models" [value]="model.Model_ID">
+                {{model.Model_Name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('home')">Back</button>
@@ -27,7 +35,7 @@
           [disabled]="year.value == '' || make.value == '' || model.value == ''">Next</button>
         </div>
       </mat-step>
-      <mat-step label="Is this ### ### ### owned, financed, or leased?">
+      <mat-step label="Is this {{getModelName() || 'vehicle'}} owned, financed, or leased?">
         <div>
           <mat-radio-group [(ngModel)]="vehicle.vehicleOwned" name="vehicleOwned" #vehicleOwned="ngModel">
             <mat-radio-button value="Owned">Owned</mat-radio-button>
@@ -40,7 +48,7 @@
           [disabled]="vehicleOwned.value == ''">Next</button>
         </div>
       </mat-step>
-      <mat-step label="How is the ### ### ### primarily used?">
+      <mat-step label="How is the {{getModelName() || 'vehicle'}} primarily used?">
         <div>
           <mat-radio-group [(ngModel)]="vehicle.vehicleUsage" name="vehicleUsage" #vehicleUsage="ngModel">
             <mat-radio-button value="Commute">Commute ( to work or school )</mat-radio-button>
@@ -66,11 +74,11 @@
           [disabled]="vehicleUsage.value == ''">Next</button>
         </div>
       </mat-step>
-      <mat-step label="What's the annual mileage for this ### ### ###?">
+      <mat-step label="What's the annual mileage for this {{getModelName() || 'vehicle'}}?">
         <div>
           <mat-form-field>
             <input matInput placeholder="Annual Mileage"
-            [(ngModel)]="vehicle.annualMileage" name="annualMileage" #annualMileage="ngModel">
+            [(ngModel)]="vehicle.annualMileage" name="annualMileage" #annualMileage="ngModel"pattern="[0-9]{1,7}">
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>

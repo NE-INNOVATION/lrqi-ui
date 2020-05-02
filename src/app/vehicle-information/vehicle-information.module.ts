@@ -9,6 +9,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import { VehicleService } from '../services/vehicle.service';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { VehicleService } from '../services/vehicle.service';
     MatStepperModule,
     MatRadioModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule
   ],
   declarations: [
     VehicleInfoComponent,

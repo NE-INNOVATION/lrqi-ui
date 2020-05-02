@@ -1,18 +1,26 @@
 import { Injectable } from "@angular/core";
 import { Vehicle } from "../models/vehicle.model";
-import { Observable } from "rxjs";
+import { Observable, from } from "rxjs";
 import { environment } from "../../environments/environment";
 import { CommonService } from "./common.service";
-import { map } from "rxjs/operators";
+import { map, tap, flatMap } from "rxjs/operators";
 import { CustomerService } from '../services/customer.service';
+import { Make } from '../models/make.model';
+import { HttpClient } from '@angular/common/http';
+import { Model } from '../models/model.model';
 
 @Injectable()
 export class VehicleService {
   vehicle: Vehicle;
+  private _makeURL = 'assets/make.json';
+  private _modelURL = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId'; //440?format=json
   
   constructor(
     private _service: CommonService, 
-    private _customerService: CustomerService) { }
+    private _customerService: CustomerService,
+    private http: HttpClient) { 
+      
+    }
 
   saveVehicleInfo(vehicle: Vehicle)  : Observable<any> {
     let quoteid = this._customerService.getQuoteId();
@@ -31,5 +39,15 @@ export class VehicleService {
     }else {
       return new Vehicle();
     }
+  }
+
+  getAllMake(): Observable<Make[]> {
+    return this.http.get<Make[]>(this._makeURL);
+  }
+
+  getModels(make: string): Observable<Model[]> {
+    return this.http.get<any>(`${this._modelURL}/${make}?format=json`).pipe(
+      map(x => x.Results)
+    )
   }
 }
