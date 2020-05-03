@@ -8,8 +8,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FormsModule } from '@angular/forms';
 import { IncidentService } from '../services/incident.service';
-
-
+import {MatSelectModule} from '@angular/material/select';
+import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,7 +18,10 @@ import { IncidentService } from '../services/incident.service';
     MatInputModule,
     MatButtonModule,
     MatStepperModule,
-    FormsModule
+    FormsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   declarations: [
     IncidentInfoComponent,

@@ -10,13 +10,30 @@
       <mat-step label="We need a few details about this incident.">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Incident Type"
-            [(ngModel)]="incident.category" name="type" #name="ngModel">
+            <mat-label>Incident Type</mat-label>
+            <mat-select [(ngModel)]="incident.category" name="type" #name="ngModel">
+              <mat-option value="A">
+                Incident Type A
+              </mat-option>
+              <mat-option value="B">
+                Incident Type B
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Who was driving?"
-            [(ngModel)]="incident.driver" name="driver" #driver="ngModel">
+            <mat-label>Who was driving?</mat-label>
+            <mat-select [(ngModel)]="incident.driver" name="driver" #driver="ngModel">
+              <mat-option value="A">
+                Driver 1
+              </mat-option>
+              <mat-option value="B">
+                Driver 2
+              </mat-option>
+              <mat-option value="U">
+                Unlisted
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('driver')">Back</button>
@@ -27,13 +44,22 @@
       <mat-step label="We need a few details about this incident.">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Were you primarily responsible for the accident?"
-            [(ngModel)]="incident.responsible" name="responsible" #responsible="ngModel">
+            <mat-label class="sm-lbl">Were you primarily responsible for the accident?</mat-label>
+            <mat-select [(ngModel)]="incident.responsible" name="responsible" #responsible="ngModel">
+              <mat-option value="Y">
+                Yes
+              </mat-option>
+              <mat-option value="N">
+                No
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="How long ago was this accident? "
-            [(ngModel)]="incident.when" name="when" #when="ngModel">
+            <mat-label class="sm-lbl">When was this accident?</mat-label>
+            <input matInput [matDatepicker]="dp" [(ngModel)]="incident.when" name="when" #when="ngModel" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" disabled="false"></mat-datepicker>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
