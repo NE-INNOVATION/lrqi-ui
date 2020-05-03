@@ -7,7 +7,7 @@ export class Driver {
     ssn: string;
     employmentStatus: string;
     currentIns: string;
-    licensedAge: string;
+    licensedDt: string;
     education: string;
   
     constructor() {
@@ -19,7 +19,7 @@ export class Driver {
       this.ssn = '';
       this.employmentStatus = '';
       this.currentIns = '';
-      this.licensedAge = '';
+      this.licensedDt = '';
       this.education = '';
     }
   }

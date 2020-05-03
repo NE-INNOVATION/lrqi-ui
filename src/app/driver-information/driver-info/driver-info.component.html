@@ -11,27 +11,75 @@
         <div>
           <mat-form-field>
             <input matInput placeholder="Name"
-            [(ngModel)]="driver.name" name="name" #name="ngModel">
+            [(ngModel)]="driver.name" name="name" #name="ngModel" minlength="3" maxlength="40">
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Gender"
-            [(ngModel)]="driver.gender" name="gender" #gender="ngModel">
+            <mat-label>Gender</mat-label>
+            <mat-select [(ngModel)]="driver.gender" name="gender" #gender="ngModel">
+              <mat-option value="M">
+                Male
+              </mat-option>
+              <mat-option value="F">
+                Female
+              </mat-option>
+              <mat-option value="O">
+                Other
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Marital Status"
-            [(ngModel)]="driver.maritalStatus" name="maritalStatus" #maritalStatus="ngModel">
+            <mat-label>Marital Status</mat-label>
+            <mat-select [(ngModel)]="driver.maritalStatus" name="maritalStatus" #maritalStatus="ngModel">
+              <mat-option value="S">
+                Single
+              </mat-option>
+              <mat-option value="M">
+                Married
+              </mat-option>
+              <mat-option value="W">
+                Widowed
+              </mat-option>
+              <mat-option value="S">
+                Separated
+              </mat-option>
+              <mat-option value="D">
+                Divorced
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
             <input matInput placeholder="Social Security Number"
-            [(ngModel)]="driver.ssn" name="ssn" #ssn="ngModel">
+            [(ngModel)]="driver.ssn" name="ssn" #ssn="ngModel" pattern="^\d{3}-\d{2}-\d{4}$">
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Employment Status"
-            [(ngModel)]="driver.employmentStatus" name="employmentStatus" #employmentStatus="ngModel">
+            <mat-label>Employment Status</mat-label>
+            <mat-select [(ngModel)]="driver.employmentStatus" name="employmentStatus" #employmentStatus="ngModel">
+              <mat-option value="E">
+                Employed
+              </mat-option>
+              <mat-option value="SE">
+                Self-employed
+              </mat-option>
+              <mat-option value="OW">
+                Out of work
+              </mat-option>
+              <mat-option value="HM">
+                Homemaker
+              </mat-option>
+              <mat-option value="S">
+                Student
+              </mat-option>
+              <mat-option value="R">
+                Retired
+              </mat-option>
+              <mat-option value="U">
+                Unable to work
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('vehicle')">Back</button>
@@ -42,8 +90,15 @@
       <mat-step label="About your insurance">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Do you currently have auto insurance?"
-            [(ngModel)]="driver.currentIns" name="currentIns" #currentins="ngModel">
+            <mat-label class="sm-lbl">Do you currently have auto insurance?</mat-label>
+            <mat-select [(ngModel)]="driver.currentIns" name="currentIns" #currentins="ngModel">
+              <mat-option value="Y">
+                Yes
+              </mat-option>
+              <mat-option value="N">
+                No
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
@@ -54,21 +109,49 @@
       <mat-step label="Tell us more about your driving history">
         <div>
           <mat-form-field>
-            <input matInput 
-            placeholder="How old were you when you got your driver's license in the U.S. or Canada? " 
-            [(ngModel)]="driver.licensedAge" name="licensedAge" #licensedAge="ngModel">
-          </mat-form-field>
+            <mat-label>Date when licensed</mat-label>
+            <input matInput [matDatepicker]="dp3" [(ngModel)]="driver.licensedDt" name="licensedDt" #licensedDt="ngModel" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          </mat-form-field> 
           <br>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext
-          [disabled]="licensedAge.value == ''">Next</button>
+          [disabled]="licensedDt.value == ''">Next</button>
         </div>
       </mat-step>
       <mat-step label="What is the highest level of education you have completed?">
         <div>
           <mat-form-field>
-            <input matInput placeholder="What is the highest level of education you have completed?" 
-            [(ngModel)]="driver.education" name="education" #education="ngModel">
+            <mat-select [(ngModel)]="driver.education" name="education" #education="ngModel">
+              <mat-option value="T">
+                Less than High School
+              </mat-option>
+              <mat-option value="V">
+                Vocational
+              </mat-option>
+              <mat-option value="H">
+                High School
+              </mat-option>
+              <mat-option value="A">
+                Associate
+              </mat-option>
+              <mat-option value="B">
+                Bachelors
+              </mat-option>
+              <mat-option value="M">
+                Masters
+              </mat-option>
+              <mat-option value="D">
+                Doctors
+              </mat-option>
+              <mat-option value="L">
+                Lawyer
+              </mat-option>
+              <mat-option value="P">
+                PhD
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>

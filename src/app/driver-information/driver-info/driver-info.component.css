@@ -25,3 +25,7 @@
 mat-form-field{
     min-width: 350px;
 }
+
+.sm-lbl{
+    font-size: 18px !important;
+}

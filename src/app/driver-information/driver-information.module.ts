@@ -9,6 +9,9 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {FormsModule } from '@angular/forms';
 import { CommonService } from '../services/common.service';
 import { DriverService } from '../services/driver.service';
+import {MatSelectModule} from '@angular/material/select';
+import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -17,7 +20,10 @@ import { DriverService } from '../services/driver.service';
     MatInputModule,
     MatStepperModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatMomentDateModule,
+    MatDatepickerModule
   ],
   declarations: [
     DriverInfoComponent,
