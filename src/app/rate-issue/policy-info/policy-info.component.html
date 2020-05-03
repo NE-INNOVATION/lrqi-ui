@@ -12,33 +12,44 @@
     <mat-vertical-stepper>
       <mat-step label="Contact Info">
         <mat-form-field>
-          <input matInput placeholder="Email"
-          [(ngModel)]="policy.confirmEmail" name="confirmEmail">
+          <input matInput placeholder="Email" #email="ngModel"
+          [(ngModel)]="policy.confirmEmail" name="confirmEmail" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput placeholder="Contact Number"
-          [(ngModel)]="policy.confirmContactNum" name="confirmContactNum">
+          <input matInput placeholder="Contact Number" #contact="ngModel"
+          [(ngModel)]="policy.confirmContactNum" name="confirmContactNum" pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$">
         </mat-form-field>
         <br>
         <div>
           <button mat-button matStepperPrevious (click)="navigate('rate')">Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext [disabled]="email.value == '' || contact.value == ''">Next</button>
         </div>
       </mat-step>
       <mat-step label="Payment">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Bank Name"
-            [(ngModel)]="policy.bankName" name="bankName">
+            <mat-label>Bank Name</mat-label>
+            <mat-select [(ngModel)]="policy.bankName" name="bankName" #bankName="ngModel">
+              <mat-option value="CH">
+                Chase
+              </mat-option>
+              <mat-option value="BOA">
+                Bank of America
+              </mat-option>
+              <mat-option value="CO">
+                Capital One Bank
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Account Number"
-            [(ngModel)]="policy.accountNum" name="accountNum">
+            <input matInput placeholder="Account Number" #accountNum="ngModel"
+            [(ngModel)]="policy.accountNum" name="accountNum" pattern="^\w{1,17}$">
           </mat-form-field>
           <br>
-          <button mat-raised-button color="accent" (click)="save()">Issue</button>
+          <button mat-raised-button color="accent" (click)="save()" 
+          [disabled]="accountNum.value == '' || bankName.value == ''">Issue</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>

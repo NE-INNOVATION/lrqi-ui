@@ -10,7 +10,7 @@ import {FormsModule } from '@angular/forms';
 import { RateService } from '../services/rate.service';
 import { PolicyService } from '../services/policy.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -20,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatStepperModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   declarations: [
     RateComponent,

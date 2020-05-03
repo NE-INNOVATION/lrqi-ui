@@ -42,6 +42,14 @@ export class RateComponent implements OnInit {
     })
   }
 
+  disableFirst(){
+    return this.coverage.bi == '' || this.coverage.pd == '' || this.coverage.med == '';
+  }
+
+  disableRate(){
+    return this.coverage.comp == '' || this.coverage.col == '' || this.coverage.rerim == '';
+  }
+
   save() {
     this._rateService.saveCoverageInfo(this.coverage).subscribe((data) => {
       this.setAction();
