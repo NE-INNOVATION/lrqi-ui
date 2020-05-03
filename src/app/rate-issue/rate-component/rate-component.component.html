@@ -11,42 +11,99 @@
       <mat-step label="Your Policy Coverage">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Bodily Injury Liability" formControlName="bi">
+            <mat-label>Bodily Injury Liability</mat-label>
+            <mat-select formControlName="bi">
+              <mat-option value="1">
+                20/30
+              </mat-option>
+              <mat-option value="2">
+                30/50
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Property Damage Liability" formControlName="pd">
+            <mat-label>Property Damage Liability</mat-label>
+            <mat-select formControlName="pd">
+              <mat-option value="1">
+                30
+              </mat-option>
+              <mat-option value="2">
+                50
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Medical Payments" formControlName="med">
+            <mat-label>Medical Payments</mat-label>
+            <mat-select formControlName="med">
+              <mat-option value="1">
+                30000
+              </mat-option>
+              <mat-option value="2">
+                50000
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('incident')">Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext [disabled]="disableFirst()">Next</button>
         </div>
       </mat-step>
       <mat-step label="Your Vehicle Coverage?">
         <div>
           <mat-form-field>
-            <input matInput placeholder="Comprehensive" formControlName="comp">
+            <mat-label>Comprehensive</mat-label>
+            <mat-select formControlName="comp">
+              <mat-option value="1">
+                5000
+              </mat-option>
+              <mat-option value="2">
+                10000
+              </mat-option>
+              <mat-option value="3">
+                20000
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Collision" formControlName="col">
+            <mat-label>Collision</mat-label>
+            <mat-select formControlName="col">
+              <mat-option value="1">
+                5000
+              </mat-option>
+              <mat-option value="2">
+                10000
+              </mat-option>
+              <mat-option value="3">
+                20000
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Rental Reimbursement" formControlName="rerim">
+            <mat-label>Rental Reimbursement</mat-label>
+            <mat-select formControlName="rerim">
+              <mat-option value="1">
+                5000
+              </mat-option>
+              <mat-option value="2">
+                10000
+              </mat-option>
+              <mat-option value="3">
+                20000
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="accent" [disabled]="disableRate()" (click)="save()">
+            {{action}}
+          </button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
   </form>
-  <button mat-raised-button color="accent" (click)="save()">
-    {{action}}
-  </button>
   
 </div>
