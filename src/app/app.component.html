@@ -1,5 +1,6 @@
 <header id="primary-header" role="banner" data-bind="visible: showHeader">
-  <span class="icon-geico" style="cursor: pointer" tabindex="-1" [routerLink]="['/home']">LRQI</span>
+  <span class="icon-geico" style="cursor: pointer" tabindex="-1" [routerLink]="['/home']">{{title}}</span>
 </header>
+
 <app-navigation class="menu"></app-navigation>
 <router-outlet></router-outlet>
