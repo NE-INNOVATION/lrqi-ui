@@ -12,4 +12,4 @@
 ## 3. Exercise : Build Details page for each entity and show either as next page or better in an overlay
 ### 3.1 : Trainers can prepare the test data for this so that the team building this have something to start off with
 ## 4. Exercise : Rate and issue to show Customer Info
-### 4.1. for this we need to call gateway api which inturn will take care of collecting all the info and send to respective api
+### 4.1. for this we need to call gateway api which inturn will take care of collecting all the info and send to respective api.
