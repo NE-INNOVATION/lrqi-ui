@@ -1,3 +1,5 @@
+![Build Angular](https://github.com/NE-INNOVATION/lrqi-ui/workflows/Build%20Angular/badge.svg)
+
 # Lean Rate, Quote and Issuance Application
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
