@@ -1,20 +1,33 @@
 on: push
-name: Build Angular
+name: npm build, lint, test and publish
 jobs:
-  build:
-    runs-on: ubuntu-latest  
+  build-and-publish:
+    name: build and publish
+    runs-on: ubuntu-latest
     steps:
-            - uses: actions/checkout@v1
-            #- name: Login to DockerHub Registry
-              #run: echo ${{ secrets.docker_password }} | docker login -u ${{ secrets.docker_username }} --password ${{ secrets.docker_password }}
-            - name: Get the version
-              id: vars
-              run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
-            - name: Build the tagged Docker image
-              run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
-            #- name: Push the tagged Docker image
-              #run: docker push pjlamb12/angular-cli:${{steps.vars.outputs.tag}}
-            #- name: Build the latest Docker image
-              #run: docker build . --file Dockerfile --tag pjlamb12/angular-cli:latest
-            #- name: Push the latest Docker image
-              #run: docker push pjlamb12/angular-cli:latest
+      - uses: actions/checkout@master
+      - name: npm install
+        uses: actions/npm@master
+        with:
+          args: install
+     # - name: npm test
+      #  uses: actions/npm@master
+       # with:
+        #  args: run test
+      #- name: npm lint
+       # uses: actions/npm@master
+        #with:
+         # args: run lint
+      - name: docker build
+        uses: actions/docker/cli@master
+        with:
+          args: build -t afu174/github-action-example-node .
+      - name: docker login
+        uses: actions/docker/login@master
+        env:
+          DOCKER_PASSWORD: ${{ secrets.docker_password }}
+          DOCKER_USERNAME: ${{ secrets.docker_username }}
+      #- name: docker push
+       # uses: actions/docker/cli@master
+        #with:
+        #  args: push afu174/github-action-example-node
