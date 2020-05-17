@@ -31,4 +31,4 @@ jobs:
           #echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
           echo ls
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag lrqi:deploy
+        run: docker build . --file ./Dockerfile --tag lrqi:deploy
