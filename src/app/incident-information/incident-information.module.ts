@@ -11,6 +11,8 @@ import { IncidentService } from '../services/incident.service';
 import {MatSelectModule} from '@angular/material/select';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/incidents.reducer';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     FormsModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    StoreModule.forFeature('incidents', reducer)
   ],
   declarations: [
     IncidentInfoComponent,

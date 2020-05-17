@@ -21,14 +21,6 @@ export class CustomerService {
       }));
   }
 
-  getCustomerInfo(): Customer {
-    if (this.customer !== undefined) {
-      return this.customer;
-    }else {
-      return new Customer();
-    }
-  }
-
   getQuoteId(): string {
     return this.customer.quoteId;
   }

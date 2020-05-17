@@ -11,6 +11,8 @@ import { RateService } from '../services/rate.service';
 import { PolicyService } from '../services/policy.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import { reducer } from './state/quotes.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    StoreModule.forFeature('quote', reducer)
   ],
   declarations: [
     RateComponent,

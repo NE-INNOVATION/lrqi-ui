@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { getAppName } from './app.actions';
-import { AppState } from './app.state';
+import { State } from './app.state';
  
-export const initialState: AppState = {
+export const initialState: State = {
     title: "NEION"
 };
  

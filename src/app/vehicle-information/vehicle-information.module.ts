@@ -10,6 +10,8 @@ import {FormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import { VehicleService } from '../services/vehicle.service';
 import {MatSelectModule} from '@angular/material/select';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/vehicles.reducer';
 
 @NgModule({
   imports: [
@@ -20,7 +22,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatRadioModule,
     MatButtonModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    StoreModule.forFeature('vehicles', reducer)
   ],
   declarations: [
     VehicleInfoComponent,

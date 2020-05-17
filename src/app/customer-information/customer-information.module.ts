@@ -10,6 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 
+/* NgRx */
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/customer.reducer';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +24,8 @@ import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment
     FormsModule,
     HttpClientModule,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    StoreModule.forFeature('customers', reducer)
   ],
   declarations: [
     CustomerInfoComponent

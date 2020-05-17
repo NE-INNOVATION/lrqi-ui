@@ -7,11 +7,12 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
 import {FormsModule } from '@angular/forms';
-import { CommonService } from '../services/common.service';
 import { DriverService } from '../services/driver.service';
 import {MatSelectModule} from '@angular/material/select';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/drivers.reducer';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatButtonModule,
     MatSelectModule,
     MatMomentDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    StoreModule.forFeature('drivers', reducer)
   ],
   declarations: [
     DriverInfoComponent,
