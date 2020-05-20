@@ -5,7 +5,10 @@ export enum VehicleActionTypes {
     SetVehicle = '[Vehicle] Set Vehicle',
     ClearVehicle = '[Vehicle] Clear Vehicle Info',
     InitializeVehicle = '[Vehicle] Initialize Vehicle',
-    Load = '[Vehicle] Load Vehicles'
+    Load = '[Vehicle] Load Vehicles',
+    LoadSuccess = '[Vehicle] Load Success',
+    LoadFail = '[Vehicle] Load Fail',
+
 }
 
 export class SetVehicle implements Action {
@@ -26,7 +29,21 @@ export class Load implements Action {
     constructor(public payload: Array<Vehicle>) {}
 }
 
+export class LoadSuccess implements Action {
+    readonly type = VehicleActionTypes.LoadSuccess;
+  
+    constructor(public payload: Vehicle[]) { }
+  }
+  
+  export class LoadFail implements Action {
+    readonly type = VehicleActionTypes.LoadFail;
+  
+    constructor(public payload: string) { }
+  }
+
 export type VehicleActions = SetVehicle
  | ClearVehicle
  | InitializeVehicle 
- | Load;
+ | Load
+ | LoadSuccess
+ | LoadFail;

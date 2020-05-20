@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehicleInfoComponent } from './vehicle-info/vehicle-info.component';
-import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { VehicleListComponent } from './vehicle-list/vehicle-list.component';
 import { VehicleRoutingModule } from './vehicle-routing.module';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -12,6 +12,10 @@ import { VehicleService } from '../services/vehicle.service';
 import {MatSelectModule} from '@angular/material/select';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/vehicles.reducer';
+import { VehicleEffects } from './state/vehicle.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { MatTableModule } from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -23,15 +27,18 @@ import { reducer } from './state/vehicles.reducer';
     MatButtonModule,
     FormsModule,
     MatSelectModule,
-    StoreModule.forFeature('vehicles', reducer)
+    MatTableModule,
+    MatCheckboxModule,
+    StoreModule.forFeature('vehicles', reducer),
+    EffectsModule.forFeature([VehicleEffects])
   ],
   declarations: [
     VehicleInfoComponent,
-    VehicleDetailsComponent
+    VehicleListComponent
   ],
   exports: [
     VehicleInfoComponent,
-    VehicleDetailsComponent
+    VehicleListComponent
   ],
   providers: [
     VehicleService

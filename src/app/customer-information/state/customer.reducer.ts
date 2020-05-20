@@ -9,12 +9,21 @@ export interface State extends fromRoot.State {
 
 export interface CustomerState {
     customer: Customer,
-    quoteIds: Array<string>
+    error: string
 }
 
 const initialState: CustomerState = {
-    quoteIds: [],
-    customer: null
+    customer: {
+        apt: '',
+        dob: '',
+        firstName: '',
+        id: '',
+        lastName: '',
+        quoteId: '',
+        stAddr: '',
+        zipCode: ''
+    },
+    error: ''
 }
 
 const getCustomerFeatureState = createFeatureSelector<CustomerState>('customers');
@@ -22,7 +31,6 @@ const getCustomerFeatureState = createFeatureSelector<CustomerState>('customers'
 export const getCustomer = createSelector(
     getCustomerFeatureState,
     state => {
-        console.log('returning', state.customer)
         return state.customer
     }
 );
@@ -55,9 +63,8 @@ export function reducer(state = initialState, action: CustomerActions): Customer
                 ...state,
                 customer: null
             }
-        case CustomerActionTypes.InitializeCustomer: 
+        case CustomerActionTypes.InitializeCustomer:
             return {
-                quoteIds: [],
                 customer: {
                     apt: '',
                     dob: '',
@@ -67,8 +74,22 @@ export function reducer(state = initialState, action: CustomerActions): Customer
                     quoteId: '',
                     stAddr: '',
                     zipCode: ''
-                }    
+                },
+                error: ''
             }
+        case CustomerActionTypes.CreateCustomerSuccess:
+            return {
+                ...state,
+                customer: action.payload,
+                error: ''
+            };
+
+        case CustomerActionTypes.CreateCustomerFail:
+            return {
+                ...state,
+                error: action.payload
+            };
+
         default:
             return state;
     }

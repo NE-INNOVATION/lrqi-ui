@@ -15,7 +15,7 @@ export class DriverService {
     private _customerService: CustomerService) { }
 
   saveDriverInfo(driver: Driver) : Observable<any> {
-    let quoteId = this._customerService.getQuoteId();
+    let quoteId = '';//this._customerService.getQuoteId();
     return this._service.post(environment.gatewayUrl + 
       '/driver/' + quoteId, driver)
       .pipe( map(res => {

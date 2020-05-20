@@ -8,8 +8,9 @@ export interface State extends fromRoot.State {
 }
 
 export interface VehicleState {
-    currentVehicle: Vehicle,
-    vehicles: Array<Vehicle>
+    currentVehicle: Vehicle;
+    vehicles: Array<Vehicle>;
+    error: string;
 }
 
 const initialState: VehicleState = {
@@ -26,7 +27,8 @@ const initialState: VehicleState = {
         vehicleUsage: '',
         year: ''
     },
-    vehicles: []
+    vehicles: [],
+    error: ''
 };
 
 const getVehicleFeatureState = createFeatureSelector<VehicleState>('vehicles');
@@ -45,6 +47,11 @@ export const getCurentVehicle = createSelector(
     }
 );
 
+export const getError = createSelector(
+    getVehicleFeatureState,
+    state => state.error
+);
+
 export function reducer(state = initialState, action: VehicleActions): VehicleState {
     switch (action.type) {
         case VehicleActionTypes.SetVehicle:
@@ -52,7 +59,7 @@ export function reducer(state = initialState, action: VehicleActions): VehicleSt
                 ...state,
                 currentVehicle: action.payload
             };
-        case VehicleActionTypes.ClearVehicle: 
+        case VehicleActionTypes.ClearVehicle:
             return {
                 ...state,
                 currentVehicle: {
@@ -67,31 +74,46 @@ export function reducer(state = initialState, action: VehicleActions): VehicleSt
                     vehiclePrimaryUse: '',
                     vehicleUsage: '',
                     year: ''
-                }
+                },
+                error: ''
             }
         case VehicleActionTypes.InitializeVehicle:
-                return {
-                    ...state,
-                    currentVehicle: {
-                        annualMileage: '',
-                        daysDriven: '',
-                        id: '',
-                        make: '',
-                        milesDriven: '',
-                        model: '',
-                        quoteId: '',
-                        vehicleOwned: '',
-                        vehiclePrimaryUse: '',
-                        vehicleUsage: '',
-                        year: ''
-                    }
-                }
+            return {
+                ...state,
+                currentVehicle: {
+                    annualMileage: '',
+                    daysDriven: '',
+                    id: '',
+                    make: '',
+                    milesDriven: '',
+                    model: '',
+                    quoteId: '',
+                    vehicleOwned: '',
+                    vehiclePrimaryUse: '',
+                    vehicleUsage: '',
+                    year: ''
+                },
+                error: ''
+            }
         case VehicleActionTypes.Load:
             return {
                 ...state,
                 vehicles: action.payload
             }
-        
+        case VehicleActionTypes.LoadSuccess:
+            return {
+                ...state,
+                vehicles: action.payload,
+                error: ''
+            };
+
+        case VehicleActionTypes.LoadFail:
+            return {
+                ...state,
+                vehicles: [],
+                error: action.payload
+            };
+
         default:
             return state;
     }

@@ -14,6 +14,7 @@ export class VehicleService {
   vehicle: Vehicle;
   private _makeURL = 'assets/make.json';
   private _modelURL = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId'; //440?format=json
+  private _prefillSvcUrl = '';
   
   constructor(
     private _service: CommonService, 
@@ -23,7 +24,7 @@ export class VehicleService {
     }
 
   saveVehicleInfo(vehicle: Vehicle)  : Observable<any> {
-    let quoteid = this._customerService.getQuoteId();
+    let quoteid = ''//this._customerService.getQuoteId();
     return this._service.post(environment.gatewayUrl + 
       '/vehicle/' + quoteid, vehicle)
       .pipe( map(res => {
@@ -47,6 +48,12 @@ export class VehicleService {
 
   getModels(make: string): Observable<Model[]> {
     return this.http.get<any>(`${this._modelURL}/${make}?format=json`).pipe(
+      map(x => x.Results)
+    )
+  }
+
+  getVehicles(): Observable<Vehicle[]> {
+    return this.http.get<any>(`${this._prefillSvcUrl}/`).pipe(
       map(x => x.Results)
     )
   }

@@ -15,7 +15,7 @@ export class IncidentService {
     private _customerService: CustomerService) { }
 
   saveIncidentInfo(incident: Incident) : Observable<any> {
-    let quoteId = this._customerService.getQuoteId();
+    let quoteId = ''//this._customerService.getQuoteId();
     return this._service.post(environment.gatewayUrl + 
       '/incident/' + quoteId, incident).pipe( map(res =>  {
       this.incident = incident;

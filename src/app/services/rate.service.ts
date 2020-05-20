@@ -15,7 +15,7 @@ export class RateService {
     private _customerService: CustomerService) { }
 
   saveCoverageInfo(coverage: Coverage) : Observable<any> {
-    let quoteId = this._customerService.getQuoteId();
+    let quoteId = ''//this._customerService.getQuoteId''();
     return this._service.post(environment.gatewayUrl + 
       '/rate/' + quoteId, coverage)
       .pipe( map(res => {
@@ -28,7 +28,6 @@ export class RateService {
 
   getCoverageInfo(): Coverage {
     if (this.coverage !== undefined) {
-      console.log('returning coverage', this.coverage)
       return this.coverage;
     }else {
       return new Coverage();

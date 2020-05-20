@@ -45,7 +45,7 @@ import { EffectsModule } from '@ngrx/effects';
     MatButtonToggleModule,
     StoreModule.forRoot({appState: appReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([])
   ],
   providers: [CommonService, CustomerService],
   bootstrap: [AppComponent]

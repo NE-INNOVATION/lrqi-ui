@@ -16,7 +16,7 @@ export class PolicyService {
   ) { }
 
   savePolicyInfo(policy: Policy) : Observable<any> {
-    let quoteId = this._customerService.getQuoteId();
+    let quoteId = ''//this._customerService.getQuoteId();
     return this._service.post(environment.gatewayUrl + 
       '/issue/' + quoteId, policy)
       .pipe( map(res => {

@@ -1,0 +1,12 @@
+table{
+    width: 100%;
+    text-align: left;
+}
+
+table tr{
+    cursor: pointer;
+}
+
+tr:hover{
+    background-color: whitesmoke;
+}
