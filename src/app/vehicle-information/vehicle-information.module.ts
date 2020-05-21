@@ -6,7 +6,7 @@ import { VehicleRoutingModule } from './vehicle-routing.module';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
-import {FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import { VehicleService } from '../services/vehicle.service';
 import {MatSelectModule} from '@angular/material/select';
@@ -26,6 +26,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatRadioModule,
     MatButtonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,

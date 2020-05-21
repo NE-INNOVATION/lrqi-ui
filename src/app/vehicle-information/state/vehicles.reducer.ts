@@ -113,6 +113,23 @@ export function reducer(state = initialState, action: VehicleActions): VehicleSt
                 vehicles: [],
                 error: action.payload
             };
+        case VehicleActionTypes.CreateVehicleSuccess:
+            return {
+                ...state,
+                currentVehicle: action.payload,
+                error: ''
+            };
+
+        case VehicleActionTypes.CreateVehicleFail:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case VehicleActionTypes.SetQuoteId:
+            return {
+                ...state,
+                currentVehicle: { ...state.currentVehicle, quoteId: action.payload }
+            }
 
         default:
             return state;

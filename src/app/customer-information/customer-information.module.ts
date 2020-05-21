@@ -8,7 +8,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 /* NgRx */
 import { StoreModule } from '@ngrx/store';

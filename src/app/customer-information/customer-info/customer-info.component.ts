@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Customer } from '../../models/customer.model';
-import { CustomerService } from '../../services/customer.service';
 
 import { takeWhile } from 'rxjs/operators';
 

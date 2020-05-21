@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Vehicle } from "../models/vehicle.model";
-import { Observable, from } from "rxjs";
+import { Observable, from, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
 import { CommonService } from "./common.service";
-import { map, tap, flatMap } from "rxjs/operators";
+import { map, tap, flatMap, catchError } from "rxjs/operators";
 import { CustomerService } from '../services/customer.service';
 import { Make } from '../models/make.model';
 import { HttpClient } from '@angular/common/http';
@@ -11,35 +11,41 @@ import { Model } from '../models/model.model';
 
 @Injectable()
 export class VehicleService {
-  vehicle: Vehicle;
   private _makeURL = 'assets/make.json';
   private _modelURL = 'https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeId'; //440?format=json
-  private _prefillSvcUrl = '';
   
   constructor(
     private _service: CommonService, 
-    private _customerService: CustomerService,
-    private http: HttpClient) { 
-      
-    }
+    private http: HttpClient) { }
 
-  saveVehicleInfo(vehicle: Vehicle)  : Observable<any> {
-    let quoteid = ''//this._customerService.getQuoteId();
+  createVehicle(vehicle: Vehicle)  : Observable<any> {
     return this._service.post(environment.gatewayUrl + 
-      '/vehicle/' + quoteid, vehicle)
-      .pipe( map(res => {
-        this.vehicle = vehicle;
-        this.vehicle.id = res.result;
-        this.vehicle.quoteId = quoteid;
-      }));
+      '/vehicle/' + vehicle.quoteId, vehicle)
+      .pipe( 
+        tap(data => console.log('createVehicle:' + JSON.stringify(data))),
+        map(data => {
+          return {
+            ...vehicle,
+            id: data.result
+          }
+        }),
+        catchError(this.handleError));
   }
 
-  getVehicleInfo(): Vehicle {
-    if (this.vehicle !== undefined) {
-      return this.vehicle;
-    }else {
-      return new Vehicle();
+  private handleError(err) {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
     }
+    console.error(err);
+    return throwError(errorMessage);
   }
 
   getAllMake(): Observable<Make[]> {
@@ -52,9 +58,4 @@ export class VehicleService {
     )
   }
 
-  getVehicles(): Observable<Vehicle[]> {
-    return this.http.get<any>(`${this._prefillSvcUrl}/`).pipe(
-      map(x => x.Results)
-    )
-  }
 }

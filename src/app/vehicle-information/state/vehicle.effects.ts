@@ -9,20 +9,22 @@ import { VehicleService } from '../../services/vehicle.service';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as vehicleActions from './vehicle.actions';
+import { Vehicle } from 'src/app/models/vehicle.model';
 
 @Injectable()
 export class VehicleEffects {
 
   constructor(private vehicleService: VehicleService,
-              private actions$: Actions) { }
+    private actions$: Actions) { }
 
   @Effect()
-  loadVehicles$: Observable<Action> = this.actions$.pipe(
-    ofType(vehicleActions.VehicleActionTypes.Load),
-    mergeMap(action =>
-      this.vehicleService.getVehicles().pipe(
-        map(vehicles => (new vehicleActions.LoadSuccess(vehicles))),
-        catchError(err => of(new vehicleActions.LoadFail(err)))
+  createVehicle$: Observable<Action> = this.actions$.pipe(
+    ofType(vehicleActions.VehicleActionTypes.CreateVehicle),
+    map((action: vehicleActions.CreateVehicle) => action.payload),
+    mergeMap((vehicle: Vehicle) =>
+      this.vehicleService.createVehicle(vehicle).pipe(
+        map(newVehicle => (new vehicleActions.CreateVehicleSuccess(newVehicle))),
+        catchError(err => of(new vehicleActions.CreateVehicleFail(err)))
       )
     )
   );

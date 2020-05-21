@@ -18,7 +18,8 @@ export class CustomerService {
         map(data => {
           return {
             ...customer,
-            ...data
+            id: data.crn,
+            quoteId: data.quoteid
           }
         }),
         catchError(this.handleError)

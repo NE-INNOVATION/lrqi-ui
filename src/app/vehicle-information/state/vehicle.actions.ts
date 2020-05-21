@@ -8,12 +8,15 @@ export enum VehicleActionTypes {
     Load = '[Vehicle] Load Vehicles',
     LoadSuccess = '[Vehicle] Load Success',
     LoadFail = '[Vehicle] Load Fail',
-
+    CreateVehicle = '[Vehicle] Create Vehicle',
+    CreateVehicleSuccess = '[Vehicle] Create Vehicle Success',
+    CreateVehicleFail = '[Vehicle] Create Vehicle Fail',
+    SetQuoteId = '[Vehicle] Set Quote Id'
 }
 
 export class SetVehicle implements Action {
     readonly type = VehicleActionTypes.SetVehicle;
-    constructor(public payload: Vehicle) {}
+    constructor(public payload: Vehicle) { }
 }
 
 export class ClearVehicle implements Action {
@@ -26,24 +29,51 @@ export class InitializeVehicle implements Action {
 
 export class Load implements Action {
     readonly type = VehicleActionTypes.Load;
-    constructor(public payload: Array<Vehicle>) {}
+    constructor(public payload: Array<Vehicle>) { }
 }
 
 export class LoadSuccess implements Action {
     readonly type = VehicleActionTypes.LoadSuccess;
-  
+
     constructor(public payload: Vehicle[]) { }
-  }
-  
-  export class LoadFail implements Action {
+}
+
+export class LoadFail implements Action {
     readonly type = VehicleActionTypes.LoadFail;
-  
+
     constructor(public payload: string) { }
-  }
+}
+export class CreateVehicle implements Action {
+    readonly type = VehicleActionTypes.CreateVehicle;
+
+    constructor(public payload: Vehicle) { }
+}
+
+export class CreateVehicleSuccess implements Action {
+    readonly type = VehicleActionTypes.CreateVehicleSuccess;
+
+    constructor(public payload: Vehicle) { }
+}
+
+export class CreateVehicleFail implements Action {
+    readonly type = VehicleActionTypes.CreateVehicleFail;
+
+    constructor(public payload: string) { }
+}
+
+export class SetQuoteId implements Action {
+    readonly type = VehicleActionTypes.SetQuoteId;
+
+    constructor(public payload: string) { }
+}
 
 export type VehicleActions = SetVehicle
- | ClearVehicle
- | InitializeVehicle 
- | Load
- | LoadSuccess
- | LoadFail;
+    | ClearVehicle
+    | InitializeVehicle
+    | Load
+    | LoadSuccess
+    | LoadFail
+    | CreateVehicle
+    | CreateVehicleSuccess
+    | CreateVehicleFail
+    | SetQuoteId;
