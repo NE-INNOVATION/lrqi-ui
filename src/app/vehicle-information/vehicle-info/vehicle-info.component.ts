@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Vehicle } from '../../models/vehicle.model';
 import { VehicleService } from '../../services/vehicle.service';
 import { Make } from 'src/app/models/make.model';
-import { Observable } from 'rxjs';
 import { Model } from 'src/app/models/model.model';
 
 import { takeWhile } from 'rxjs/operators';

@@ -5,13 +5,13 @@
   If any driver has had any incident, please add them below.
   <br>
   <br>
-  <form>
+  <form novalidate (ngSubmit)="saveIncident()" [formGroup]="incidentForm">
     <mat-vertical-stepper>
       <mat-step label="We need a few details about this incident.">
         <div>
           <mat-form-field>
             <mat-label>Incident Type</mat-label>
-            <mat-select [(ngModel)]="incident.category" name="type" #name="ngModel">
+            <mat-select formControlName="category" name="type">
               <mat-option value="A">
                 Incident Type A
               </mat-option>
@@ -23,7 +23,7 @@
           <br>
           <mat-form-field>
             <mat-label>Who was driving?</mat-label>
-            <mat-select [(ngModel)]="incident.driver" name="driver" #driver="ngModel">
+            <mat-select formControlName="driver" name="driver">
               <mat-option value="A">
                 Driver 1
               </mat-option>
@@ -37,15 +37,14 @@
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('driver')">Back</button>
-          <button mat-button matStepperNext
-          [disabled]="name.value == '' || driver.value == ''">Next</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="We need a few details about this incident.">
         <div>
           <mat-form-field>
             <mat-label class="sm-lbl">Were you primarily responsible for the accident?</mat-label>
-            <mat-select [(ngModel)]="incident.responsible" name="responsible" #responsible="ngModel">
+            <mat-select formControlName="responsible" name="responsible">
               <mat-option value="Y">
                 Yes
               </mat-option>
@@ -57,14 +56,14 @@
           <br>
           <mat-form-field>
             <mat-label class="sm-lbl">When was this accident?</mat-label>
-            <input matInput [matDatepicker]="dp" [(ngModel)]="incident.when" name="when" #when="ngModel" disabled>
+            <input matInput [matDatepicker]="dp" formControlName="when" name="when" disabled>
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
             <mat-datepicker #dp startView="multi-year" disabled="false"></mat-datepicker>
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext (click)="save()"
-          [disabled]="responsible.value == '' || when.value == ''">Next</button>
+          <button type="submit" mat-button matStepperNext
+          [disabled]="!incidentForm.valid || !incidentForm.dirty">Next</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>

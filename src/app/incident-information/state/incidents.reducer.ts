@@ -4,12 +4,13 @@ import { IncidentActions, IncidentActionTypes } from './incident.actions';
 import { Incident } from 'src/app/models/incident.model';
 
 export interface State extends fromRoot.State {
-    incidentss: IncidentState
+    incidents: IncidentState
 }
 
 export interface IncidentState {
     currentIncident: Incident,
-    Incidents: Array<Incident>
+    incidents: Array<Incident>,
+    error: string;
 }
 
 const initialState: IncidentState = {
@@ -21,7 +22,8 @@ const initialState: IncidentState = {
         responsible: '',
         when: ''
     },
-    Incidents: []
+    incidents: [],
+    error: ''
 };
 
 const getIncidentFeatureState = createFeatureSelector<IncidentState>('incidents');
@@ -29,7 +31,7 @@ const getIncidentFeatureState = createFeatureSelector<IncidentState>('incidents'
 export const getIncidents = createSelector(
     getIncidentFeatureState,
     state => {
-        return state.Incidents
+        return state.incidents
     }
 );
 
@@ -38,6 +40,11 @@ export const getCurentIncident = createSelector(
     state => {
         return state.currentIncident
     }
+);
+
+export const getError = createSelector(
+    getIncidentFeatureState,
+    state => state.error
 );
 
 export function reducer(state = initialState, action: IncidentActions): IncidentState {
@@ -74,7 +81,37 @@ export function reducer(state = initialState, action: IncidentActions): Incident
         case IncidentActionTypes.Load:
             return {
                 ...state,
-                Incidents: action.payload
+                incidents: action.payload
+            }
+        case IncidentActionTypes.LoadSuccess:
+            return {
+                ...state,
+                incidents: action.payload,
+                error: ''
+            };
+
+        case IncidentActionTypes.LoadFail:
+            return {
+                ...state,
+                incidents: [],
+                error: action.payload
+            };
+        case IncidentActionTypes.CreateIncidentSuccess:
+            return {
+                ...state,
+                currentIncident: action.payload,
+                error: ''
+            };
+
+        case IncidentActionTypes.CreateIncidentFail:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case IncidentActionTypes.SetQuoteId:
+            return {
+                ...state,
+                currentIncident: { ...state.currentIncident, quoteId: action.payload }
             }
 
         default:

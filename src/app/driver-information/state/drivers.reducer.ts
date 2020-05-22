@@ -9,7 +9,8 @@ export interface State extends fromRoot.State {
 
 export interface DriverState {
     currentDriver: Driver,
-    drivers: Array<Driver>
+    drivers: Array<Driver>,
+    error: string;
 }
 
 const initialState: DriverState = {
@@ -25,23 +26,29 @@ const initialState: DriverState = {
         name: '',
         quoteId: '',
         ssn: ''
-    }
+    },
+    error: ''
 };
 
 const getDriverFeatureState = createFeatureSelector<DriverState>('drivers');
 
-export const getVehicles = createSelector(
+export const getDrivers = createSelector(
     getDriverFeatureState,
     state => {
         return state.drivers
     }
 );
 
-export const getCurentVehicle = createSelector(
+export const getCurentDriver = createSelector(
     getDriverFeatureState,
     state => {
         return state.currentDriver
     }
+);
+
+export const getError = createSelector(
+    getDriverFeatureState,
+    state => state.error
 );
 
 export function reducer(state = initialState, action: DriverActions): DriverState {
@@ -51,7 +58,7 @@ export function reducer(state = initialState, action: DriverActions): DriverStat
                 ...state,
                 currentDriver: action.payload
             };
-        case DriverActionTypes.ClearDriver: 
+        case DriverActionTypes.ClearDriver:
             return {
                 ...state,
                 currentDriver: {
@@ -68,27 +75,57 @@ export function reducer(state = initialState, action: DriverActions): DriverStat
                 }
             }
         case DriverActionTypes.InitializeDriver:
-                return {
-                    ...state,
-                    currentDriver: {
-                        currentIns: '',
-                        education: '',
-                        employmentStatus: '',
-                        gender: '',
-                        id: '',
-                        licensedDt: '',
-                        maritalStatus: '',
-                        name: '',
-                        quoteId: '',
-                        ssn: ''
-                    }
+            return {
+                ...state,
+                currentDriver: {
+                    currentIns: '',
+                    education: '',
+                    employmentStatus: '',
+                    gender: '',
+                    id: '',
+                    licensedDt: '',
+                    maritalStatus: '',
+                    name: '',
+                    quoteId: '',
+                    ssn: ''
                 }
+            }
         case DriverActionTypes.Load:
             return {
                 ...state,
                 drivers: action.payload
             }
-        
+        case DriverActionTypes.LoadSuccess:
+            return {
+                ...state,
+                drivers: action.payload,
+                error: ''
+            };
+
+        case DriverActionTypes.LoadFail:
+            return {
+                ...state,
+                drivers: [],
+                error: action.payload
+            };
+        case DriverActionTypes.CreateDriverSuccess:
+            return {
+                ...state,
+                currentDriver: action.payload,
+                error: ''
+            };
+
+        case DriverActionTypes.CreateDriverFail:
+            return {
+                ...state,
+                error: action.payload
+            };
+        case DriverActionTypes.SetQuoteId:
+            return {
+                ...state,
+                currentDriver: { ...state.currentDriver, quoteId: action.payload }
+            }
+
         default:
             return state;
     }
