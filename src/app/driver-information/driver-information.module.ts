@@ -6,12 +6,15 @@ import { DriverDetailsComponent } from './driver-details/driver-details.componen
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
-import {FormsModule } from '@angular/forms';
-import { CommonService } from '../services/common.service';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DriverService } from '../services/driver.service';
 import {MatSelectModule} from '@angular/material/select';
 import { MatMomentDateModule, MomentDateAdapter } from "@angular/material-moment-adapter";
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/drivers.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { DriverEffects } from './state/driver.effects';
 
 @NgModule({
   imports: [
@@ -20,10 +23,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     MatStepperModule,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatSelectModule,
     MatMomentDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    StoreModule.forFeature('drivers', reducer),
+    EffectsModule.forFeature([DriverEffects])
   ],
   declarations: [
     DriverInfoComponent,

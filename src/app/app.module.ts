@@ -21,7 +21,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 
 //store
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from './store/app.reducer';
+import { appReducer } from './state/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -45,7 +45,7 @@ import { EffectsModule } from '@ngrx/effects';
     MatButtonToggleModule,
     StoreModule.forRoot({appState: appReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([])
   ],
   providers: [CommonService, CustomerService],
   bootstrap: [AppComponent]

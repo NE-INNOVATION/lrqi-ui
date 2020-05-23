@@ -6,7 +6,7 @@
   <br>
   <span class="premium" *ngIf="coverage.premium">Your current Premium is : ${{coverage.premium}}</span>
   <br>
-  <form [formGroup]="coverageForm">
+  <form novalidate (ngSubmit)="saveCoverage()" [formGroup]="coverageForm">
     <mat-vertical-stepper>
       <mat-step label="Your Policy Coverage">
         <div>
@@ -98,8 +98,11 @@
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-raised-button color="accent" [disabled]="disableRate()" (click)="save()">
-            {{action}}
+          <button *ngIf="this.coverage.id === ''" type="submit" mat-raised-button color="accent" [disabled]="!coverageForm.valid || !coverageForm.dirty">
+            RATE
+          </button>
+          <button *ngIf="this.coverage.id !== ''" mat-raised-button color="accent" (click)="navigate('policy')">
+            Continue to Purchase
           </button>
         </div>
       </mat-step>

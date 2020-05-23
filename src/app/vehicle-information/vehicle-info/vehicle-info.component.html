@@ -5,17 +5,17 @@
   Let's add this vehicle
   <br>
   <br>
-  <form>
+  <form novalidate (ngSubmit)="saveVehicle()" [formGroup]="vehicleForm">
     <mat-vertical-stepper>
       <mat-step label="What's the year, make and model?">
         <div>
           <mat-form-field>
             <input matInput placeholder="Year"
-            [(ngModel)]="vehicle.year" name="year" #year="ngModel" pattern="^[12][0-9]{3}$">
+            formControlName="year" name="year" pattern="^[12][0-9]{3}$">
           </mat-form-field>
           <mat-form-field>
             <mat-label>Vehicle Make</mat-label>
-            <mat-select [(ngModel)]="vehicle.make" name="make" #make="ngModel" (selectionChange)="loadModels()">
+            <mat-select formControlName="make" name="make" (selectionChange)="loadModels(vehicleForm.value.make)">
               <mat-option *ngFor="let make of makes" [value]="make.code">
                 {{make.name}}
               </mat-option>
@@ -23,7 +23,7 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Vehicle Model</mat-label>
-            <mat-select #model="ngModel" [(ngModel)]="vehicle.model" name="model" #make="ngModel" (selectionChange)="loadModels()">
+            <mat-select formControlName="model" name="model">
               <mat-option *ngFor="let model of models" [value]="model.Model_ID">
                 {{model.Model_Name}}
               </mat-option>
@@ -31,62 +31,59 @@
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('home')">Back</button>
-          <button mat-button matStepperNext
-          [disabled]="year.value == '' || make.value == '' || model.value == ''">Next</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="Is this {{getModelName() || 'vehicle'}} owned, financed, or leased?">
         <div>
-          <mat-radio-group [(ngModel)]="vehicle.vehicleOwned" name="vehicleOwned" #vehicleOwned="ngModel">
+          <mat-radio-group formControlName="vehicleOwned" name="vehicleOwned">
             <mat-radio-button value="Owned">Owned</mat-radio-button>
             <mat-radio-button value="Financed">Financed</mat-radio-button>
             <mat-radio-button value="Leased">Leased</mat-radio-button>
           </mat-radio-group>
           <br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext
-          [disabled]="vehicleOwned.value == ''">Next</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="How is the {{getModelName() || 'vehicle'}} primarily used?">
         <div>
-          <mat-radio-group [(ngModel)]="vehicle.vehicleUsage" name="vehicleUsage" #vehicleUsage="ngModel">
+          <mat-radio-group formControlName="vehicleUsage" name="vehicleUsage">
             <mat-radio-button value="Commute">Commute ( to work or school )</mat-radio-button>
             <mat-radio-button value="Pleasure">Pleasure</mat-radio-button>
             <mat-radio-button value="Business">Business</mat-radio-button>
           </mat-radio-group>
           <br>
-          <mat-form-field *ngIf="vehicleUsage.value == 'Commute'">
+          <mat-form-field *ngIf="vehicleForm.value.vehicleUsage == 'Commute'">
             <input matInput placeholder="Days Driven to work and/or school"
-            [(ngModel)]="vehicle.daysDriven" name="daysDriven">
+            formControlName="daysDriven" name="daysDriven">
           </mat-form-field>
-          <mat-form-field *ngIf="vehicleUsage.value == 'Commute'">
+          <mat-form-field *ngIf="vehicleForm.value.vehicleUsage == 'Commute'">
             <input matInput placeholder="Miles Driven to work/school ( one way )"
-            [(ngModel)]="vehicle.milesDriven" name="milesDriven">
+            formControlName="milesDriven" name="milesDriven">
           </mat-form-field>
-          <mat-form-field *ngIf="vehicleUsage.value == 'Business'">
+          <mat-form-field *ngIf="vehicleForm.value.vehicleUsage == 'Business'">
             <input matInput placeholder="How is this vehicle used in business?"
-            [(ngModel)]="vehicle.vehiclePrimaryUse" name="vehiclePrimaryUse">
+            formControlName="vehiclePrimaryUse" name="vehiclePrimaryUse">
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext
-          [disabled]="vehicleUsage.value == ''">Next</button>
+          <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="What's the annual mileage for this {{getModelName() || 'vehicle'}}?">
         <div>
           <mat-form-field>
             <input matInput placeholder="Annual Mileage"
-            [(ngModel)]="vehicle.annualMileage" name="annualMileage" #annualMileage="ngModel"pattern="[0-9]{1,7}">
+            formControlName="annualMileage" name="annualMileage" pattern="[0-9]{1,7}">
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext (click)="save()"
-          [disabled]="annualMileage.value == ''">Next</button>
+          <button type="submit" mat-button matStepperNext 
+          [disabled]="!vehicleForm.valid || !vehicleForm.dirty">Next</button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
   </form>
-  <app-vehicle-details></app-vehicle-details>
+  <app-vehicle-list></app-vehicle-list>
 </div>

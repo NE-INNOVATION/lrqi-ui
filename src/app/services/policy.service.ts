@@ -1,37 +1,42 @@
 import { Injectable } from "@angular/core";
 import { Policy } from "../models/policy.model";
 import { CommonService } from "./common.service";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
-import { map } from "rxjs/operators";
-import { CustomerService } from "./customer.service";
+import { map, catchError, tap } from "rxjs/operators";
 
 @Injectable()
 export class PolicyService {
-  policy: Policy;
 
-  constructor(
-    private _service: CommonService,
-    private _customerService: CustomerService
-  ) { }
+  constructor(private _service: CommonService) { }
 
-  savePolicyInfo(policy: Policy) : Observable<any> {
-    let quoteId = this._customerService.getQuoteId();
-    return this._service.post(environment.gatewayUrl + 
-      '/issue/' + quoteId, policy)
-      .pipe( map(res => {
-        this.policy = policy;
-        this.policy.quoteId = quoteId;
-        this.policy.id = res.policyId;
-        this.policy.policyNumber = res.policyNumber;
-      }));
+  createPolicy(policy: Policy): Observable<any> {
+    return this._service.post(environment.gatewayUrl +
+      '/issue/' + policy.quoteId, policy)
+      .pipe(tap(data => console.log('createPolicy:' + JSON.stringify(data))),
+        map(data => {
+          return {
+            ...policy,
+            id: data.policyId,
+            policyNumber: data.policyNumber
+          }
+        }),
+        catchError(this.handleError));
   }
 
-  getPolicyInfo(): Policy {
-    if (this.policy !== undefined) {
-      return this.policy;
-    }else {
-      return new Policy();
+  private handleError(err) {
+    // in a real world app, we may send the server to some remote logging infrastructure
+    // instead of just logging it to the console
+    let errorMessage: string;
+    if (err.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
     }
+    console.error(err);
+    return throwError(errorMessage);
   }
 }

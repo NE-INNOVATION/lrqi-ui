@@ -11,6 +11,12 @@ import { RateService } from '../services/rate.service';
 import { PolicyService } from '../services/policy.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import { reducer } from './state/coverages.reducer';
+import { StoreModule } from '@ngrx/store';
+import { CoverageEffects } from './state/coverages.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { policyReducer } from './state/issue.reducer';
+import { PolicyEffects } from './state/issue.effects';
 
 @NgModule({
   imports: [
@@ -21,7 +27,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatStepperModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    StoreModule.forFeature('coverages', reducer),
+    StoreModule.forFeature('policy', policyReducer),
+    EffectsModule.forFeature([CoverageEffects, PolicyEffects])
   ],
   declarations: [
     RateComponent,
