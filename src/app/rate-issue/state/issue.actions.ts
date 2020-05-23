@@ -48,7 +48,7 @@ export class SetQuoteId implements Action {
     constructor(public payload: string) { }
 }
 
-export type RateActions = SetPolicy
+export type PolicyActions = SetPolicy
  | ClearPolicy 
  | InitializePolicy
  | CreatePolicy
