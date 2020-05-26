@@ -2,10 +2,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CustomerInfoComponent } from './customer-information/customer-info/customer-info.component';
 
+import {
+  OKTA_CONFIG,
+  OktaAuthGuard,
+  OktaAuthModule,
+  OktaCallbackComponent,
+} from '@okta/okta-angular';
+
+import config from './app-auth.config';
+
 const routes: Routes = [
   {
     path: 'home',
-    component: CustomerInfoComponent
+    component: CustomerInfoComponent,
+    canActivate: [ OktaAuthGuard ]
+  },
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent,
   },
   {
     path: 'vehicle',
@@ -19,7 +33,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+    //OktaAuthModule
+  ],
+  exports: [
+    RouterModule,
+    OktaAuthModule
+  ],
+  providers: [
+    { provide: OKTA_CONFIG, useValue: config.oidc },
+  ],
 })
 export class AppRoutingModule { }
