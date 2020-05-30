@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gatewayUrl : 'http://localhost:8080/api/gateway'
+  gatewayUrl : 'http://lrqi-gateway-development.apps.openshift.ne-innovation.com/api/gateway'
 };
 
 /*

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  gatewayUrl : 'https://gatewayapi.apps.apbg.apcf.io/api/gateway'
+  gatewayUrl : 'http://lrqi-gateway-development.apps.openshift.ne-innovation.com/api/gateway'
 };
