@@ -12,8 +12,7 @@ export class DriverService {
     private _service: CommonService) { }
 
   createDriver(driver: Driver) : Observable<any> {
-    return this._service.post(environment.gatewayUrl + 
-      '/driver/' + driver.quoteId, driver)
+    return this._service.post(`${environment.gatewayUrl}/api/drivers/driverInfo/${driver.id || 0}/${driver.quoteId}`, driver)
       .pipe( tap(data => console.log('createDriver:' + JSON.stringify(data))),
       map(data => {
         return {

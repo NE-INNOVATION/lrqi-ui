@@ -12,8 +12,7 @@ export class IncidentService {
     private _service: CommonService) { }
 
   createIncident(incident: Incident): Observable<any> {
-    return this._service.post(environment.gatewayUrl +
-      '/incidents/' + incident.quoteId, incident).pipe(
+    return this._service.post(`${environment.gatewayUrl}/api/incidents/incidentInfo/${incident.id || 0}/${incident.quoteId}`, incident).pipe(
         tap(data => console.log('createIncident:' + JSON.stringify(data))),
         map(data => {
           return {

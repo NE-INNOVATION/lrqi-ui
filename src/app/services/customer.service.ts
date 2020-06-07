@@ -11,8 +11,7 @@ export class CustomerService {
   constructor(private _service: CommonService) { }
 
   createCustomer(customer: Customer) : Observable<any>{
-    return this._service.post(environment.gatewayUrl + 
-      '/customer', customer)
+    return this._service.post(`${environment.gatewayUrl}/api/customers/customerInfo/${customer.id || 0}`, customer)
       .pipe( 
         tap(data => console.log('createCustomer:' + JSON.stringify(data))),
         map(data => {

@@ -4,7 +4,6 @@ import { Observable, from, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
 import { CommonService } from "./common.service";
 import { map, tap, flatMap, catchError } from "rxjs/operators";
-import { CustomerService } from '../services/customer.service';
 import { Make } from '../models/make.model';
 import { HttpClient } from '@angular/common/http';
 import { Model } from '../models/model.model';
@@ -19,8 +18,7 @@ export class VehicleService {
     private http: HttpClient) { }
 
   createVehicle(vehicle: Vehicle)  : Observable<any> {
-    return this._service.post(environment.gatewayUrl + 
-      '/vehicle/' + vehicle.quoteId, vehicle)
+    return this._service.post(`${environment.gatewayUrl}/api/vehicles/vehicleInfo/${vehicle.id || 0}/${vehicle.quoteId}`, vehicle)
       .pipe( 
         tap(data => console.log('createVehicle:' + JSON.stringify(data))),
         map(data => {
