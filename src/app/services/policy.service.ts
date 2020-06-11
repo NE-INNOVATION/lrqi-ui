@@ -11,8 +11,7 @@ export class PolicyService {
   constructor(private _service: CommonService) { }
 
   createPolicy(policy: Policy): Observable<any> {
-    return this._service.post(environment.gatewayUrl +
-      '/issue/' + policy.quoteId, policy)
+    return this._service.post(`${environment.gatewayUrl}/api/rate_issue/issue/${policy.id || 0}/${policy.quoteId}`, policy)
       .pipe(tap(data => console.log('createPolicy:' + JSON.stringify(data))),
         map(data => {
           return {

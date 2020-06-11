@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  gatewayUrl : 'http://lrqi-gateway-development.apps.openshift.ne-innovation.com/api/gateway'
+  gatewayUrl: 'http://neion-gw-development.apps.openshift.ne-innovation.com'
+  //gatewayUrl : 'http://lrqi-gateway-development.apps.openshift.ne-innovation.com/api/gateway'
 };
 
 /*
