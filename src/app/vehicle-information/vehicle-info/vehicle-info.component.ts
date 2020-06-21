@@ -25,12 +25,7 @@ export class VehicleInfoComponent implements OnInit, OnDestroy {
   componentActive = true;
   vehicleForm: FormGroup;
   makes: Make[];
-  models: Model[] = [
-    {
-      Model_ID: 'some-id',
-      Model_Name: 'some-name'
-    }
-  ];
+  models: Model[];
 
   constructor(
     private _router: Router,
@@ -102,12 +97,12 @@ export class VehicleInfoComponent implements OnInit, OnDestroy {
 
   loadModels(make: string) {
     this._vehicleService.getModels(make).subscribe(data => {
-      // this.models = data.map(x => {
-      //   return {
-      //     Model_ID: x.Model_ID,
-      //     Model_Name: x.Model_Name
-      //   }
-      // })
+      this.models = data.map(x => {
+        return {
+          Model_ID: x.Model_ID,
+          Model_Name: x.Model_Name
+        }
+      })
     })
   }
 
