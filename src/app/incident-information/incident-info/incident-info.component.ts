@@ -8,8 +8,10 @@ import { takeWhile } from 'rxjs/operators';
 /* NgRx */
 import { Store, select } from '@ngrx/store';
 import * as fromIncident from '../state/incidents.reducer';
+import * as fromDriver from '../../driver-information/state/drivers.reducer';
 import * as incidentActions from '../state/incident.actions';
 import * as fromCustomer from '../../customer-information/state/customer.reducer';
+import { Driver } from 'src/app/models/driver.model';
 
 @Component({
   selector: 'app-incident-info',
@@ -19,6 +21,7 @@ import * as fromCustomer from '../../customer-information/state/customer.reducer
 export class IncidentInfoComponent implements OnInit, OnDestroy {
 
   incident: Incident;
+  drivers: Driver[];
   componentActive = true;
   incidentForm: FormGroup;
 
@@ -41,12 +44,21 @@ export class IncidentInfoComponent implements OnInit, OnDestroy {
     ).subscribe(incident => this.setIncident(incident));
 
     this._store.pipe(
+      select(fromDriver.getCurrentDriverName),
+      takeWhile( () => this.componentActive)
+    ).subscribe( driver => this.setDrivers(driver));
+
+    this._store.pipe(
       select(fromCustomer.getCustomer),
       takeWhile(() => this.componentActive)
     ).subscribe(customer => {
       console.log('Updating incident quote id', customer);
       this._store.dispatch(new incidentActions.SetQuoteId(customer.quoteId))
     });
+  }
+
+  setDrivers(drivers: Driver[]){
+    this.drivers = drivers;
   }
 
   setIncident(incident: Incident | null): void {

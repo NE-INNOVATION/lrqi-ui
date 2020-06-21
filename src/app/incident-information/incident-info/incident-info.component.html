@@ -3,8 +3,8 @@
 </section>
 <div class="center question">
   If any driver has had any incident, please add them below.
-  <br>
-  <br>
+  <br />
+  <br />
   <form novalidate (ngSubmit)="saveIncident()" [formGroup]="incidentForm">
     <mat-vertical-stepper>
       <mat-step label="We need a few details about this incident.">
@@ -12,38 +12,39 @@
           <mat-form-field>
             <mat-label>Incident Type</mat-label>
             <mat-select formControlName="category" name="type">
-              <mat-option value="A">
-                Incident Type A
+              <mat-option value="S">
+                Speeding
               </mat-option>
-              <mat-option value="B">
-                Incident Type B
+              <mat-option value="D">
+                DUI
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label>Who was driving?</mat-label>
             <mat-select formControlName="driver" name="driver">
-              <mat-option value="A">
-                Driver 1
-              </mat-option>
-              <mat-option value="B">
-                Driver 2
+              <mat-option *ngFor="let driver of drivers" [value]="driver.id">
+                {{ driver.name }}
               </mat-option>
               <mat-option value="U">
                 Unlisted
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
-          <button mat-button matStepperPrevious (click)="navigate('driver')">Back</button>
+          <br />
+          <button mat-button matStepperPrevious (click)="navigate('driver')">
+            Back
+          </button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
       <mat-step label="We need a few details about this incident.">
         <div>
           <mat-form-field>
-            <mat-label class="sm-lbl">Were you primarily responsible for the accident?</mat-label>
+            <mat-label class="sm-lbl"
+              >Were you primarily responsible for the accident?</mat-label
+            >
             <mat-select formControlName="responsible" name="responsible">
               <mat-option value="Y">
                 Yes
@@ -53,17 +54,33 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label class="sm-lbl">When was this accident?</mat-label>
-            <input matInput [matDatepicker]="dp" formControlName="when" name="when" disabled>
+            <input
+              matInput
+              [matDatepicker]="dp"
+              formControlName="when"
+              name="when"
+              disabled
+            />
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp startView="multi-year" disabled="false"></mat-datepicker>
+            <mat-datepicker
+              #dp
+              startView="multi-year"
+              disabled="false"
+            ></mat-datepicker>
           </mat-form-field>
-          <br>
+          <br />
           <button mat-button matStepperPrevious>Back</button>
-          <button type="submit" mat-button matStepperNext
-          [disabled]="!incidentForm.valid || !incidentForm.dirty">Next</button>
+          <button
+            type="submit"
+            mat-button
+            matStepperNext
+            [disabled]="!incidentForm.valid || !incidentForm.dirty"
+          >
+            Next
+          </button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
