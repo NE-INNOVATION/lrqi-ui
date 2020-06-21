@@ -25,7 +25,7 @@ const initialState: DriverState = {
         maritalStatus: '',
         name: '',
         quoteId: '',
-        ssn: ''
+        licenseNum: ''
     },
     error: ''
 };
@@ -71,7 +71,7 @@ export function reducer(state = initialState, action: DriverActions): DriverStat
                     maritalStatus: '',
                     name: '',
                     quoteId: '',
-                    ssn: ''
+                    licenseNum: ''
                 }
             }
         case DriverActionTypes.InitializeDriver:
@@ -87,7 +87,7 @@ export function reducer(state = initialState, action: DriverActions): DriverStat
                     maritalStatus: '',
                     name: '',
                     quoteId: '',
-                    ssn: ''
+                    licenseNum: ''
                 }
             }
         case DriverActionTypes.Load:

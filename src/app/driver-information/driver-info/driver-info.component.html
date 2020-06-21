@@ -51,8 +51,8 @@
           </mat-form-field>
           <br>
           <mat-form-field>
-            <input matInput placeholder="Social Security Number"
-            formControlName="ssn" name="ssn" pattern="^\d{3}-\d{2}-\d{4}$">
+            <input matInput placeholder="License Number"
+            formControlName="licenseNum" name="licenseNum" pattern="^\d{9}$">
           </mat-form-field>
           <br>
           <mat-form-field>
@@ -84,7 +84,7 @@
           <br>
           <button mat-button matStepperPrevious (click)="navigate('vehicle')">Back</button>
           <button mat-button matStepperNext
-          [disabled]="driverForm.value.name == '' || driverForm.value.gender == '' || driverForm.value.maritalStatus == '' || driverForm.value.ssn == '' || driverForm.value.employmentStatus == ''">Next</button>
+          [disabled]="driverForm.value.name == '' || driverForm.value.gender == '' || driverForm.value.maritalStatus == '' || driverForm.value.licenseNum == '' || driverForm.value.employmentStatus == ''">Next</button>
         </div>
       </mat-step>
       <mat-step label="About your insurance">

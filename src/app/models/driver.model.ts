@@ -4,7 +4,7 @@ export class Driver {
     name: string;
     gender: string;
     maritalStatus: string;
-    ssn: string;
+    licenseNum: string;
     employmentStatus: string;
     currentIns: string;
     licensedDt: string;
@@ -16,7 +16,7 @@ export class Driver {
       this.name = '';
       this.gender = '';
       this.maritalStatus = '';
-      this.ssn = '';
+      this.licenseNum = '';
       this.employmentStatus = '';
       this.currentIns = '';
       this.licensedDt = '';
