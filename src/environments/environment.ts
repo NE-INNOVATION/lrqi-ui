@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  gatewayUrl: 'http://istio-ingressgateway-istiosystem.apps.openshift.ne-innovation.com'
+  gatewayUrl: 'http://istio-ingressgateway-istiosystem.apps.openshift.ne-innovation.com/gateway'
 };
 
 /*
