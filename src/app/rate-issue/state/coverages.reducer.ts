@@ -23,7 +23,8 @@ const initialState: CoverageState = {
         pd: '',
         premium: '',
         quoteId: '',
-        rerim: ''
+        rerim: '',
+        status: ''
     },
     coverages: [],
     error: ''
@@ -57,7 +58,8 @@ export function reducer(state = initialState, action: CoverageActions): Coverage
                     pd: '',
                     premium: '',
                     quoteId: '',
-                    rerim: ''
+                    rerim: '',
+                    status: ''
                 }
             }
         case CoverageActionTypes.InitializeCoverage:
@@ -72,7 +74,8 @@ export function reducer(state = initialState, action: CoverageActions): Coverage
                     pd: '',
                     premium: '',
                     quoteId: '',
-                    rerim: ''
+                    rerim: '',
+                    status: ''
                 }
             }
         case CoverageActionTypes.Load:

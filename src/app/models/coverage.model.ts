@@ -8,6 +8,7 @@ export class Coverage {
   rerim: string;
   premium: any;
   quoteId: string;
+  status: string;
 
   constructor() {
     this.id = '';
@@ -19,5 +20,6 @@ export class Coverage {
     this.rerim = '';
     this.premium = '';
     this.quoteId = '';
+    this.status = ''
   }
 }

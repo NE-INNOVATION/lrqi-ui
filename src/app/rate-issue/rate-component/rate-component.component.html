@@ -3,6 +3,7 @@
 </section>
 <div class="center question">
   Your Coverage Info
+  <span *ngIf="coverage.status == 'UWREF'">UWREF : Property Damage - 30 , Please change Property Damage Seleciton </span>
   <br>
   <span class="premium" *ngIf="coverage.premium">Your current Premium is : ${{coverage.premium}}</span>
   <br>

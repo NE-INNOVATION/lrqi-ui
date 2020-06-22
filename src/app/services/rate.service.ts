@@ -13,14 +13,13 @@ export class RateService {
     private _service: CommonService) { }
 
   createCoverage(coverage: Coverage): Observable<any> {
-    return this._service.post(`${environment.gatewayUrl}/api/rate_issue/rate/${coverage.id || 0}/${coverage.quoteId}`, coverage)
+    return this._service.post(`${environment.gatewayUrl}/api/rate/${coverage.id || 0}/${coverage.quoteId}`, coverage)
       .pipe(
         tap(data => console.log('createCoverage:' + JSON.stringify(data))),
         map(data => {
           return {
             ...coverage,
-            id: data.coverageId,
-            premium: data.premium
+            ...data
           }
         }),
         catchError(this.handleError));
