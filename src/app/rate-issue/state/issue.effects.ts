@@ -18,7 +18,7 @@ export class PolicyEffects {
     private actions$: Actions) { }
 
   @Effect()
-  createCoverage$: Observable<Action> = this.actions$.pipe(
+  createPolicy$: Observable<Action> = this.actions$.pipe(
     ofType(policyActions.PolicyActionTypes.CreatePolicy),
     map((action: policyActions.CreatePolicy) => action.payload),
     mergeMap((policy: Policy) =>
