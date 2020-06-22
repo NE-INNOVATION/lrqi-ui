@@ -3,7 +3,7 @@
 </section>
 <div class="center question">
   Your Coverage Info
-  <span *ngIf="coverage.status == 'UWREF'">UWREF : Property Damage - 30 , Please change Property Damage Seleciton </span>
+  <span *ngIf="coverage.status == 'UWREF'">UWREF : Property Damage - 30 , Please change Property Damage Selection </span>
   <br>
   <span class="premium" *ngIf="coverage.premium">Your current Premium is : ${{coverage.premium}}</span>
   <br>
@@ -48,7 +48,7 @@
           </mat-form-field>
           <br>
           <button mat-button matStepperPrevious (click)="navigate('incident')">Back</button>
-          <button mat-button matStepperNext [disabled]="disableFirst()">Next</button>
+          <button type="button" mat-button matStepperNext [disabled]="disableFirst()">Next</button>
         </div>
       </mat-step>
       <mat-step label="Your Vehicle Coverage?">
