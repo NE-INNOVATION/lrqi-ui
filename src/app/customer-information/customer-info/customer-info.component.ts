@@ -9,7 +9,7 @@ import { takeWhile } from "rxjs/operators";
 import { Store, select } from "@ngrx/store";
 import * as fromCustomer from "../state/customer.reducer";
 import * as customerActions from "../state/customer.actions";
-import { OktaAuthService } from "@okta/okta-angular";
+// import { OktaAuthService } from "@okta/okta-angular";
 
 @Component({
   selector: "app-customer-info",
@@ -20,30 +20,30 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
   customer: Customer | null;
   componentActive = true;
   customerForm: FormGroup;
-  userName: string;
-  isAuthenticated: boolean;
+  // userName: string;
+  // isAuthenticated: boolean;
 
   constructor(
     private _router: Router,
     private _store: Store<fromCustomer.State>,
-    private fb: FormBuilder,
-    public oktaAuth: OktaAuthService
-  ) {
-    this.oktaAuth.$authenticationState.subscribe(
-      (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
-    );
+    private fb: FormBuilder
+  ) //public oktaAuth: OktaAuthService
+  {
+    // this.oktaAuth.$authenticationState.subscribe(
+    //   (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
+    // );
   }
 
-  login() {
-    this.oktaAuth.loginRedirect("/home");
-  }
+  // login() {
+  //   this.oktaAuth.loginRedirect("/home");
+  // }
 
   async ngOnInit() {
-    this.isAuthenticated = await this.oktaAuth.isAuthenticated();
-    if (this.isAuthenticated) {
-      const userClaims = await this.oktaAuth.getUser();
-      this.userName = userClaims.name;
-    }
+    // this.isAuthenticated = await this.oktaAuth.isAuthenticated();
+    // if (this.isAuthenticated) {
+    //   const userClaims = await this.oktaAuth.getUser();
+    //   this.userName = userClaims.name;
+    // }
     this.customerForm = this.fb.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],

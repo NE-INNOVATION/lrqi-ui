@@ -26,14 +26,14 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { EffectsModule } from "@ngrx/effects";
 
-// okta auth
-import { OktaAuthModule, OKTA_CONFIG } from "@okta/okta-angular";
-import config from './app.config';
+// // okta auth
+// import { OktaAuthModule, OKTA_CONFIG } from "@okta/okta-angular";
+// import config from './app.config';
 
 @NgModule({
   declarations: [AppComponent, NavigationComponent],
   imports: [
-    OktaAuthModule,
+    //OktaAuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -55,7 +55,7 @@ import config from './app.config';
   providers: [
     CommonService,
     CustomerService,
-    { provide: OKTA_CONFIG, useValue: config.oidc },
+    //{ provide: OKTA_CONFIG, useValue: config.oidc },
   ],
   bootstrap: [AppComponent],
 })
