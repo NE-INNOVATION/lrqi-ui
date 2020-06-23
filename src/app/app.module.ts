@@ -1,37 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-//Material Modules
-import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+// Material Modules
+import { MatMenuModule } from "@angular/material/menu";
+import { MatButtonModule } from "@angular/material/button";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 // Feature Modules
-import { CustomerInformationModule } from './customer-information/customer-information.module';
-import { VehicleInformationModule } from './vehicle-information/vehicle-information.module';
-import { DriverInformationModule } from './driver-information/driver-information.module';
-import { IncidentInformationModule } from './incident-information/incident-information.module';
-import { RateIssueModule } from './rate-issue/rate-issue.module';
-import { CommonService } from './services/common.service';
-import { CustomerService } from './services/customer.service';
-import { NavigationComponent } from './navigation/navigation.component';
+import { CustomerInformationModule } from "./customer-information/customer-information.module";
+import { VehicleInformationModule } from "./vehicle-information/vehicle-information.module";
+import { DriverInformationModule } from "./driver-information/driver-information.module";
+import { IncidentInformationModule } from "./incident-information/incident-information.module";
+import { RateIssueModule } from "./rate-issue/rate-issue.module";
+import { CommonService } from "./services/common.service";
+import { CustomerService } from "./services/customer.service";
+import { NavigationComponent } from "./navigation/navigation.component";
 
-//store
-import { StoreModule } from '@ngrx/store';
-import { appReducer } from './state/app.reducer';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
+// store
+import { StoreModule } from "@ngrx/store";
+import { appReducer } from "./state/app.reducer";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment";
+import { EffectsModule } from "@ngrx/effects";
+
+// okta auth
+import { OktaAuthModule, OKTA_CONFIG } from "@okta/okta-angular";
+import config from './app.config';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavigationComponent
-  ],
+  declarations: [AppComponent, NavigationComponent],
   imports: [
+    OktaAuthModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -43,11 +45,18 @@ import { EffectsModule } from '@ngrx/effects';
     MatMenuModule,
     MatButtonModule,
     MatButtonToggleModule,
-    StoreModule.forRoot({appState: appReducer}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot({ appState: appReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot([]),
   ],
-  providers: [CommonService, CustomerService],
-  bootstrap: [AppComponent]
+  providers: [
+    CommonService,
+    CustomerService,
+    { provide: OKTA_CONFIG, useValue: config.oidc },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

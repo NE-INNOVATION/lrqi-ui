@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: CustomerInfoComponent,
-    //canActivate: [ OktaAuthGuard ]
+    canActivate: [ OktaAuthGuard ]
   },
   {
     path: 'implicit/callback',
@@ -34,15 +34,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
-    //OktaAuthModule
+    RouterModule.forRoot(routes)
   ],
   exports: [
-    RouterModule,
-    //OktaAuthModule
+    RouterModule
   ],
-  // providers: [
-  //   { provide: OKTA_CONFIG, useValue: config.oidc },
-  // ],
+  providers: [
+    { provide: OKTA_CONFIG, useValue: config.oidc },
+  ],
 })
 export class AppRoutingModule { }
