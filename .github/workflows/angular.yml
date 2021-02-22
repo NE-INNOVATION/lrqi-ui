@@ -5,7 +5,7 @@ name: UI - Node.js CI
 
 on:
   push:
-    branches: [master, dev, disaster-rec]
+    branches: [master, dev]
 
 jobs:
   build:
