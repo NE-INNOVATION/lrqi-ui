@@ -4,7 +4,8 @@ ARG target_env
 FROM node:lts-alpine AS build
 
 ### TARGET ENV FOR BUILD
-RUN echo "Building for environment: $target_env"
+RUN echo "Building for environment: "
+RUN echo $target_env
 
 #### make the 'app' folder the current working directory
 WORKDIR /usr/src/app
@@ -21,7 +22,7 @@ RUN npm install
 #### copy things
 COPY . .
 
-#### generate build --prod
+#### generate build env
 RUN npm run build --configuration $target_env
 
 ### STAGE 2: Run ###
