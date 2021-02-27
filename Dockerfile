@@ -1,5 +1,10 @@
+ARG target_env
+
 ### STAGE 1: Build ###
 FROM node:lts-alpine AS build
+
+### TARGET ENV FOR BUILD
+RUN echo "Building for environment: $target_env"
 
 #### make the 'app' folder the current working directory
 WORKDIR /usr/src/app
@@ -17,7 +22,7 @@ RUN npm install
 COPY . .
 
 #### generate build --prod
-RUN npm run build --prod
+RUN npm run build --configuration $target_env
 
 ### STAGE 2: Run ###
 FROM nginxinc/nginx-unprivileged
