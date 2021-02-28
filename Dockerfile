@@ -5,7 +5,7 @@ FROM node:lts-alpine AS build
 
 ### TARGET ENV FOR BUILD
 RUN echo "Building for environment: "
-RUN echo $target_env
+RUN echo $CLUSTER
 
 #### make the 'app' folder the current working directory
 WORKDIR /usr/src/app
