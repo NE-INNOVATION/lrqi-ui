@@ -1,7 +1,7 @@
-ARG CLUSTER=azure
-
 ### STAGE 1: Build ###
 FROM node:lts-alpine AS build
+
+ARG CLUSTER=azure
 
 ### TARGET ENV FOR BUILD
 RUN echo "Building for environment: ${CLUSTER}"
@@ -16,7 +16,7 @@ COPY package*.json ./
 RUN npm install -g @angular/cli
 
 #### install project dependencies
-#RUN npm install
+RUN npm install
 
 #### copy things
 COPY . .
