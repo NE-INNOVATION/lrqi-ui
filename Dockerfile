@@ -1,4 +1,4 @@
-ARG target_env
+ARG CLUSTER=azure
 
 ### STAGE 1: Build ###
 FROM node:lts-alpine AS build
@@ -23,7 +23,7 @@ RUN npm install
 COPY . .
 
 #### generate build env
-RUN npm run build --configuration $target_env
+RUN npm run build --configuration $CLUSTER
 
 ### STAGE 2: Run ###
 FROM nginxinc/nginx-unprivileged
