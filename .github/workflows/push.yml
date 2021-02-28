@@ -39,7 +39,7 @@ jobs:
           podman login quay.io -u ${{ secrets.docker_username }} -p ${{ secrets.docker_password }}
       - name: Build Image using Podman
         run: |
-          podman build --build-arg CLUSTER=azure . -t quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }} --cgroup-manager=cgroupfs
+          podman build --build-arg CLUSTER=azure . -t quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}-azure --cgroup-manager=cgroupfs
       - name: Push Image to Github Registry
         run: |
           podman push quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}
