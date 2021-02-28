@@ -23,7 +23,7 @@ RUN npm install
 COPY . .
 
 #### generate build env
-RUN npm run build --configuration $CLUSTER
+RUN ng build --configuration $CLUSTER
 
 ### STAGE 2: Run ###
 FROM nginxinc/nginx-unprivileged
