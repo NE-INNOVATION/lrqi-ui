@@ -4,8 +4,7 @@ ARG CLUSTER=azure
 FROM node:lts-alpine AS build
 
 ### TARGET ENV FOR BUILD
-RUN echo "Building for environment: "
-RUN echo $CLUSTER
+RUN echo "Building for environment: ${CLUSTER}"
 
 #### make the 'app' folder the current working directory
 WORKDIR /usr/src/app
