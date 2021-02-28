@@ -1,6 +1,11 @@
 ### STAGE 1: Build ###
 FROM node:lts-alpine AS build
 
+ARG CLUSTER=azure
+
+### TARGET ENV FOR BUILD
+RUN echo "Building for environment: ${CLUSTER}"
+
 #### make the 'app' folder the current working directory
 WORKDIR /usr/src/app
 
@@ -16,8 +21,8 @@ RUN npm install
 #### copy things
 COPY . .
 
-#### generate build --prod
-RUN npm run build --prod
+#### generate build env
+RUN ng build --configuration $CLUSTER
 
 ### STAGE 2: Run ###
 FROM nginxinc/nginx-unprivileged
