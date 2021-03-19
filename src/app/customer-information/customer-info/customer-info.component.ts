@@ -26,9 +26,8 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router,
     private _store: Store<fromCustomer.State>,
-    private fb: FormBuilder
-  ) //public oktaAuth: OktaAuthService
-  {
+    private fb: FormBuilder //public oktaAuth: OktaAuthService
+  ) {
     // this.oktaAuth.$authenticationState.subscribe(
     //   (isAuthenticated) => (this.isAuthenticated = isAuthenticated)
     // );
@@ -68,11 +67,6 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
       // Reset the form back to pristine
       this.customerForm.reset();
 
-      // Display the appropriate page title
-      if (this.customer.id === "") {
-      } else {
-      }
-
       // Update the data on the form
       this.customerForm.patchValue({
         firstName: this.customer.firstName,
@@ -97,7 +91,7 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
           ...this.customerForm.value,
           dob: this.customerForm.get("dob").value.format("YYYY-MM-DD"),
         };
-        if (c.id === "") {
+        if (c.quoteId === "") {
           this._store.dispatch(new customerActions.CreateCustomer(c));
           this.navigate("vehicle");
         } else {

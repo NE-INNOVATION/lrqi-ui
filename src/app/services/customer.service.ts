@@ -7,19 +7,18 @@ import { map, catchError, tap } from "rxjs/operators";
 
 @Injectable()
 export class CustomerService {
+  constructor(private _service: CommonService) {}
 
-  constructor(private _service: CommonService) { }
-
-  createCustomer(customer: Customer) : Observable<any>{
-    return this._service.post(`${environment.gatewayUrl}/api/customers/customerInfo/${customer.id || 0}`, customer)
-      .pipe( 
-        tap(data => console.log('createCustomer:' + JSON.stringify(data))),
-        map(data => {
+  createCustomer(customer: Customer): Observable<any> {
+    return this._service
+      .post(`${environment.gatewayUrl}/api/customers/customerInfo`, customer)
+      .pipe(
+        tap((data) => console.log("createCustomer:" + JSON.stringify(data))),
+        map((data) => {
           return {
             ...customer,
-            id: data.crn,
-            quoteId: data.quoteid
-          }
+            quoteId: data["quoteId"],
+          };
         }),
         catchError(this.handleError)
       );

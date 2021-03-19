@@ -1,6 +1,5 @@
 export class Customer {
   quoteId: string;
-  id: string;
   firstName: string;
   lastName: string;
   dob: string;
@@ -9,13 +8,12 @@ export class Customer {
   zipCode: string;
 
   constructor() {
-    this.quoteId = '';
-    this.id = '';
-    this.firstName = '';
-    this.lastName = '';
-    this.dob = '';
-    this.stAddr = '';
-    this.apt = '';
-    this.zipCode = '';
+    this.quoteId = "";
+    this.firstName = "";
+    this.lastName = "";
+    this.dob = "";
+    this.stAddr = "";
+    this.apt = "";
+    this.zipCode = "";
   }
 }
