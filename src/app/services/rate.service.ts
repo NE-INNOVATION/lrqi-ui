@@ -9,21 +9,22 @@ import { map, catchError, tap } from "rxjs/operators";
 export class RateService {
   coverage: Coverage;
 
-  constructor(
-    private _service: CommonService) { }
+  constructor(private _service: CommonService) {}
 
   createCoverage(coverage: Coverage): Observable<any> {
-    return this._service.post(`${environment.gatewayUrl}/api/rate_issue/rate/${coverage.id || 0}/${coverage.quoteId}`, coverage)
+    return this._service
+      .post(`${environment.gatewayUrl}/api/rate/${coverage.quoteId}`, coverage)
       .pipe(
-        tap(data => console.log('createCoverage:' + JSON.stringify(data))),
-        map(data => {
+        tap((data) => console.log("createCoverage:" + JSON.stringify(data))),
+        map((data) => {
           return {
             ...coverage,
             ...data,
-            status: data.status
-          }
+            status: data.status,
+          };
         }),
-        catchError(this.handleError));
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err) {
@@ -41,5 +42,4 @@ export class RateService {
     console.error(err);
     return throwError(errorMessage);
   }
-
 }

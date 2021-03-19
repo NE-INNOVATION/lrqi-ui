@@ -3,10 +3,14 @@
 </section>
 <div class="center question">
   Your Coverage Info
-  <span *ngIf="coverage.status == 'UWREF'">UWREF : Property Damage - 30 , Please change Property Damage Selection </span>
-  <br>
-  <span class="premium" *ngIf="coverage.premium">Your current Premium is : ${{coverage.premium}}</span>
-  <br>
+  <span *ngIf="coverage.status == 'UWREF'"
+    >UWREF : Property Damage - 30 , Please change Property Damage Selection
+  </span>
+  <br />
+  <span class="premium" *ngIf="coverage.premium"
+    >Your current Premium is : ${{ coverage.premium }}</span
+  >
+  <br />
   <form novalidate (ngSubmit)="saveCoverage()" [formGroup]="coverageForm">
     <mat-vertical-stepper>
       <mat-step label="Your Policy Coverage">
@@ -14,41 +18,38 @@
           <mat-form-field>
             <mat-label>Bodily Injury Liability</mat-label>
             <mat-select formControlName="bi">
-              <mat-option value="20/30">
-                20/30
-              </mat-option>
-              <mat-option value="30/50">
-                30/50
-              </mat-option>
+              <mat-option value="20/30"> 20/30 </mat-option>
+              <mat-option value="30/50"> 30/50 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label>Property Damage Liability</mat-label>
             <mat-select formControlName="pd">
-              <mat-option value="30">
-                30
-              </mat-option>
-              <mat-option value="50">
-                50
-              </mat-option>
+              <mat-option value="30"> 30 </mat-option>
+              <mat-option value="50"> 50 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label>Medical Payments</mat-label>
             <mat-select formControlName="med">
-              <mat-option value="30000">
-                30000
-              </mat-option>
-              <mat-option value="50000">
-                50000
-              </mat-option>
+              <mat-option value="30000"> 30000 </mat-option>
+              <mat-option value="50000"> 50000 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
-          <button mat-button matStepperPrevious (click)="navigate('incident')">Back</button>
-          <button type="button" mat-button matStepperNext [disabled]="disableFirst()">Next</button>
+          <br />
+          <button mat-button matStepperPrevious (click)="navigate('incident')">
+            Back
+          </button>
+          <button
+            type="button"
+            mat-button
+            matStepperNext
+            [disabled]="disableFirst()"
+          >
+            Next
+          </button>
         </div>
       </mat-step>
       <mat-step label="Your Vehicle Coverage?">
@@ -56,58 +57,50 @@
           <mat-form-field>
             <mat-label>Comprehensive</mat-label>
             <mat-select formControlName="comp">
-              <mat-option value="5000">
-                5000
-              </mat-option>
-              <mat-option value="10000">
-                10000
-              </mat-option>
-              <mat-option value="20000">
-                20000
-              </mat-option>
+              <mat-option value="5000"> 5000 </mat-option>
+              <mat-option value="10000"> 10000 </mat-option>
+              <mat-option value="20000"> 20000 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label>Collision</mat-label>
             <mat-select formControlName="col">
-              <mat-option value="5000">
-                5000
-              </mat-option>
-              <mat-option value="10000">
-                10000
-              </mat-option>
-              <mat-option value="20000">
-                20000
-              </mat-option>
+              <mat-option value="5000"> 5000 </mat-option>
+              <mat-option value="10000"> 10000 </mat-option>
+              <mat-option value="20000"> 20000 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <mat-form-field>
             <mat-label>Rental Reimbursement</mat-label>
             <mat-select formControlName="rerim">
-              <mat-option value="5000">
-                5000
-              </mat-option>
-              <mat-option value="10000">
-                10000
-              </mat-option>
-              <mat-option value="20000">
-                20000
-              </mat-option>
+              <mat-option value="5000"> 5000 </mat-option>
+              <mat-option value="10000"> 10000 </mat-option>
+              <mat-option value="20000"> 20000 </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
+          <br />
           <button mat-button matStepperPrevious>Back</button>
-          <button *ngIf="this.coverage.id === ''" type="submit" mat-raised-button color="accent" [disabled]="!coverageForm.valid || !coverageForm.dirty">
+          <button
+            *ngIf="this.coverage.premium === ''"
+            type="submit"
+            mat-raised-button
+            color="accent"
+            [disabled]="!coverageForm.valid || !coverageForm.dirty"
+          >
             RATE
           </button>
-          <button *ngIf="this.coverage.id !== ''" mat-raised-button color="accent" (click)="navigate('policy')">
+          <button
+            *ngIf="this.coverage.premium !== ''"
+            mat-raised-button
+            color="accent"
+            (click)="navigate('policy')"
+          >
             Continue to Purchase
           </button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
   </form>
-  
 </div>

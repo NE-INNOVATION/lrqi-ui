@@ -1,5 +1,4 @@
 export class Coverage {
-  id: string;
   bi: string;
   pd: string;
   med: string;
@@ -11,15 +10,14 @@ export class Coverage {
   status: string;
 
   constructor() {
-    this.id = '';
-    this.bi = '';
-    this.pd = '';
-    this.med = '';
-    this.comp = '';
-    this.col = '';
-    this.rerim = '';
-    this.premium = '';
-    this.quoteId = '';
-    this.status = ''
+    this.bi = "";
+    this.pd = "";
+    this.med = "";
+    this.comp = "";
+    this.col = "";
+    this.rerim = "";
+    this.premium = "";
+    this.quoteId = "";
+    this.status = "";
   }
 }
