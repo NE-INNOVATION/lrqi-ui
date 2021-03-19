@@ -12,24 +12,18 @@
           <mat-form-field>
             <mat-label>Incident Type</mat-label>
             <mat-select formControlName="category" name="type">
-              <mat-option value="S">
-                Speeding
-              </mat-option>
-              <mat-option value="D">
-                DUI
-              </mat-option>
+              <mat-option value="S"> Speeding </mat-option>
+              <mat-option value="D"> DUI </mat-option>
             </mat-select>
           </mat-form-field>
           <br />
           <mat-form-field>
             <mat-label>Who was driving?</mat-label>
             <mat-select formControlName="driver" name="driver">
-              <mat-option *ngFor="let driver of drivers" [value]="driver.id">
+              <mat-option *ngFor="let driver of drivers" [value]="driver.name">
                 {{ driver.name }}
               </mat-option>
-              <mat-option value="U">
-                Unlisted
-              </mat-option>
+              <mat-option value="U"> Unlisted </mat-option>
             </mat-select>
           </mat-form-field>
           <br />
@@ -46,12 +40,8 @@
               >Were you primarily responsible for the accident?</mat-label
             >
             <mat-select formControlName="responsible" name="responsible">
-              <mat-option value="Y">
-                Yes
-              </mat-option>
-              <mat-option value="N">
-                No
-              </mat-option>
+              <mat-option value="Y"> Yes </mat-option>
+              <mat-option value="N"> No </mat-option>
             </mat-select>
           </mat-form-field>
           <br />

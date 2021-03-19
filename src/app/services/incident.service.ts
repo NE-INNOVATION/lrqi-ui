@@ -7,20 +7,21 @@ import { map, tap, catchError } from "rxjs/operators";
 
 @Injectable()
 export class IncidentService {
-
-  constructor(
-    private _service: CommonService) { }
+  constructor(private _service: CommonService) {}
 
   createIncident(incident: Incident): Observable<any> {
-    return this._service.post(`${environment.gatewayUrl}/api/incidents/incidentInfo/${incident.id || 0}/${incident.quoteId}`, incident).pipe(
-        tap(data => console.log('createIncident:' + JSON.stringify(data))),
-        map(data => {
-          return {
-            ...incident,
-            id: data.result
-          }
+    return this._service
+      .post(
+        `${environment.gatewayUrl}/api/incidents/incidentInfo/${incident.quoteId}`,
+        incident
+      )
+      .pipe(
+        tap((data) => console.log("createIncident:" + JSON.stringify(data))),
+        map(() => {
+          return incident;
         }),
-        catchError(this.handleError));
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err) {
@@ -38,5 +39,4 @@ export class IncidentService {
     console.error(err);
     return throwError(errorMessage);
   }
-
 }
