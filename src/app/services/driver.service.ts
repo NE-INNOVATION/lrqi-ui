@@ -7,20 +7,21 @@ import { Observable, throwError } from "rxjs";
 
 @Injectable()
 export class DriverService {
+  constructor(private _service: CommonService) {}
 
-  constructor(
-    private _service: CommonService) { }
-
-  createDriver(driver: Driver) : Observable<any> {
-    return this._service.post(`${environment.gatewayUrl}/api/drivers/driverInfo/${driver.id || 0}/${driver.quoteId}`, driver)
-      .pipe( tap(data => console.log('createDriver:' + JSON.stringify(data))),
-      map(data => {
-        return {
-          ...driver,
-          id: data.result
-        }
-      }),
-      catchError(this.handleError));
+  createDriver(driver: Driver): Observable<any> {
+    return this._service
+      .post(
+        `${environment.gatewayUrl}/api/drivers/driverInfo/${driver.quoteId}`,
+        driver
+      )
+      .pipe(
+        tap((data) => console.log("createDriver:" + JSON.stringify(data))),
+        map(() => {
+          return driver;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err) {

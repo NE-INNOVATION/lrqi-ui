@@ -64,11 +64,6 @@ export class DriverInfoComponent implements OnInit, OnDestroy {
       // Reset the form back to pristine
       this.driverForm.reset();
 
-      // Display the appropriate page title
-      if (this.driver.id === "") {
-      } else {
-      }
-
       // Update the data on the form
       this.driverForm.patchValue({
         name: this.driver.name,
@@ -97,13 +92,9 @@ export class DriverInfoComponent implements OnInit, OnDestroy {
             .get("licensedDt")
             .value.format("YYYY-MM-DD"),
         };
-        if (c.id === "") {
-          this._store.dispatch(new driverActions.CreateDriver(c));
-          this.navigate("incident");
-        } else {
-          //Update Vehicle: hasn't been built yet
-          this.navigate("incident");
-        }
+
+        this._store.dispatch(new driverActions.CreateDriver(c));
+        this.navigate("incident");
       }
     } else {
       // display error message
