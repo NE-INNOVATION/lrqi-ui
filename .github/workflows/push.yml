@@ -71,8 +71,8 @@ jobs:
           # Oc command to be executed
           cmd: |
             'version'
-            'project ui-development'
-            'tag --source=docker quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}-azure development/lrqi-ui:${{ steps.extract_branch.outputs.branch }}'
+            'project neion-ui'
+            'tag --source=docker quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}-azure neion-ui/lrqi-ui:${{ steps.extract_branch.outputs.branch }}'
       # - name: Scan Image - AWS
       #   uses: Azure/container-scan@v0
       #   continue-on-error: true
