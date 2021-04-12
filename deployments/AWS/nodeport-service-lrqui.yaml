@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: lrqi-ui
+  namespace: ui-development
+  labels:
+    app: lrqi-ui
+    cis.f5.com/as3-tenant: AS3
+    cis.f5.com/as3-app: A1
+    cis.f5.com/as3-pool: web_pool
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: lrqi-ui
+    deploymentconfig: lrqi-ui
+  type: NodePort
