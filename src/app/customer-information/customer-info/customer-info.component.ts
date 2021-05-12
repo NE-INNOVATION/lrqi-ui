@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Customer } from "../../models/customer.model";
-
+import { environment } from "../../../environments/environment";
 import { takeWhile } from "rxjs/operators";
 
 /* NgRx */
@@ -38,6 +38,7 @@ export class CustomerInfoComponent implements OnInit, OnDestroy {
   // }
 
   async ngOnInit() {
+    console.log("GATEWAY URL IS ", environment.gatewayUrl);
     // this.isAuthenticated = await this.oktaAuth.isAuthenticated();
     // if (this.isAuthenticated) {
     //   const userClaims = await this.oktaAuth.getUser();
