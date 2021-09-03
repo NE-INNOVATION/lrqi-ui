@@ -72,7 +72,7 @@ jobs:
           cmd: |
             'version'
             'project testing-nginx-dr'
-            'tag --source=docker quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}-azure testing-nginx-dr/lrqi-ui:${{ steps.extract_branch.outputs.branch }}'
+            'tag --source=docker quay.io/neinnovationorg/lrqi-ui:${{ steps.extract_branch.outputs.branch }}-azure development/lrqi-ui:${{ steps.extract_branch.outputs.branch }}'
       - name: Scan Image - AWS
         uses: Azure/container-scan@v0
         continue-on-error: true
