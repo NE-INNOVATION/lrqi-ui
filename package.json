@@ -30,7 +30,7 @@
     "@ngrx/store-devtools": "^9.1.2",
     "@okta/okta-angular": "^2.0.0",
     "core-js": "^3.6.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "rxjs": "^6.6.6",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
